@@ -30,11 +30,11 @@ class Transaction extends guid(Model) {
     static get relationMappings() {
         const Account = require('./Account.js');
         return {
-            account: {
+            transactionAccount: {
                 relation: Model.BelongsToOneRelation,
                 modelClass: Account,
                 join: {
-                    from: 'transactions.accountId',
+                    from: 'transactions.account',
                     to: 'accounts.id'
                 }
             }
