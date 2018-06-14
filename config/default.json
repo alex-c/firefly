@@ -1,3 +1,10 @@
 {
-    "port": 8090
+    "port": 8090,
+    "db": {
+        "host": "localhost",
+        "port": 5432,
+        "user": "firefly",
+        "password": "",
+        "database": "firefly"
+    }
 }
