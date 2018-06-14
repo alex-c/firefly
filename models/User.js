@@ -26,6 +26,25 @@ class User extends password(Model) {
             }
         };
     }
+
+    //Relations
+    static get relationMappings() {
+        const Account = require('./Account.js');
+        return {
+            accounts: {
+                relation: Model.ManyToManyRelation,
+                modelClass: Account,
+                join: {
+                    from: 'users.id',
+                    through: {
+                        from: 'account_access.user',
+                        to: 'account_access.account'
+                    },
+                    to: 'accounts.id'
+                }
+            }
+        }
+    }
 }
 
 module.exports = User;

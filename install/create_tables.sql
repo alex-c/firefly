@@ -17,3 +17,9 @@ CREATE TABLE transactions (
     value real,
     account integer REFERENCES accounts
 );
+
+CREATE TABLE account_access (
+    user integer REFERENCES users,
+    account integer REFERENCES accounts,
+    canSee boolean DEFAULT false
+);

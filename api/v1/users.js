@@ -16,6 +16,21 @@ router.get('/', async function(req, res, next) {
 
 });
 
+//GET /api/users/accounts -- Get a user's accounts.
+router.get('/:id/accounts', async function(req, res, next) {
+
+    let id = req.params.id;
+
+    try {
+        const user = await User.query().where('id', id);
+        const accounts = await user.$relatedQuery('accounts');
+        res.json(accounts);
+    } catch (error) {
+        next(error);
+    }
+
+});
+
 //POST /api/users -- Create a user.
 router.post('/', async function(req, res, next) {
 
