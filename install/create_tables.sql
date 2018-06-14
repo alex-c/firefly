@@ -5,3 +5,15 @@ CREATE TABLE users (
     name varchar (255) NOT NULL,
     password varchar (255) NOT NULL
 );
+
+CREATE TABLE accounts (
+    id serial PRIMARY KEY,
+    name varchar (255) NOT NULL,
+    balance real DEFAULT 0
+);
+
+CREATE TABLE transactions (
+    id UUID,
+    value real,
+    account integer REFERENCES accounts
+);
