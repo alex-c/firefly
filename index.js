@@ -2,19 +2,27 @@ const express = require('express');
 const config = require('config');
 const bodyParser = require('body-parser');
 
+//Initialize DB
+require('./db/init.js');
+
 //Configure Express
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-
-//Test route
-app.get("", function(req, res) {
-    res.json({success: true});
+app.use(function (req, res, next) {
+    req.debug = config.get('debug');
+    next();
 });
+
+//Expose API
+app.use('/api', require('./api/v1/index.js'));
 
 //Error handling
 app.use(function (err, req, res, next) {
-    res.status(500).send("Error!");
+    if (req.debug) {
+        console.error(err);
+    }
+    res.status(500).send("Something went wrong!");
 });
 
 //404
