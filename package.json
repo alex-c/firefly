@@ -27,6 +27,7 @@
     "knex": "^0.14.6",
     "objection": "^1.1.10",
     "objection-guid": "^3.0.1",
+    "objection-password": "^1.0.0",
     "pg": "^7.4.3"
   }
 }

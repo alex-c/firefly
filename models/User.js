@@ -1,7 +1,8 @@
 const { Model } = require('objection');
+const password = require('objection-password')();
 
 //Defines a Firefly user
-class User extends Model {
+class User extends password(Model) {
 
     //Table name
     static get tableName() {
