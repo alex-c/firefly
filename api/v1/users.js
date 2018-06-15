@@ -36,8 +36,14 @@ router.post('/', async function(req, res, next) {
 
     if (req.body.name && req.body.password) {
 
+        var user = {
+            name: req.body.name,
+            password: req.body.password,
+            isAdmin: req.body.isAdmin || false
+        }
+
         try {
-            await User.query().insert({name: req.body.name, password: req.body.password});
+            await User.query().insert(user);
             res.status(201).end();
         } catch (error) {
             next(error);
