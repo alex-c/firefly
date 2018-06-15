@@ -22,7 +22,8 @@ class User extends password(Model) {
             properties: {
                 id: {type: 'integer'},
                 name: {type: 'string', minLength: 3, maxLength: 255},
-                password: {type: 'string', minLength: 8, maxLength: 255}
+                password: {type: 'string', minLength: 8, maxLength: 255},
+                is_admin: {type: 'boolean'}
             }
         };
     }

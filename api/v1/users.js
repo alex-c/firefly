@@ -39,7 +39,7 @@ router.post('/', async function(req, res, next) {
         var user = {
             name: req.body.name,
             password: req.body.password,
-            isAdmin: req.body.isAdmin || false
+            is_admin: req.body.isAdmin || false
         }
 
         try {

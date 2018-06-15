@@ -4,7 +4,7 @@ CREATE TABLE users (
     id serial PRIMARY KEY,
     name varchar (255) NOT NULL,
     password varchar (255) NOT NULL,
-    isAdmin boolean DEFAULT false
+    is_admin boolean DEFAULT false
 );
 
 CREATE TABLE accounts (
@@ -20,7 +20,8 @@ CREATE TABLE transactions (
 );
 
 CREATE TABLE account_access (
-    user integer REFERENCES users,
-    account integer REFERENCES accounts,
-    canSee boolean DEFAULT false
+    user_id integer REFERENCES users,
+    account_id integer REFERENCES accounts,
+    can_see boolean DEFAULT false,
+    can_book_transaction boolean DEFAULT false
 );
