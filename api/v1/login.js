@@ -13,7 +13,7 @@ async function login(req, res, next) {
         let password = req.body.password;
 
         try {
-            const user = await User.query().where('name', name);
+            const user = await User.query().where('name', name).first();
             if (user) {
                 const passwordValid = await user.verifyPassword(password);
                 if (passwordValid) {
