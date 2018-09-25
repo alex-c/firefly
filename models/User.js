@@ -38,8 +38,8 @@ class User extends password(Model) {
                 join: {
                     from: 'users.id',
                     through: {
-                        from: 'account_access.user',
-                        to: 'account_access.account'
+                        from: 'account_access.user_id',
+                        to: 'account_access.account_id'
                     },
                     to: 'accounts.id'
                 }
