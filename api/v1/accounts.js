@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-//Load required models
+//Load required models and error objects
 const Account = require('../../models/Account.js');
+const { ValidationError } = require('objection');
 
 //GET /api/accounts -- Get a list of accounts.
 router.get('/', async function(req, res, next) {
@@ -27,11 +28,15 @@ router.post('/', async function(req, res, next) {
             await Account.query().insert({name: req.body.name, balance});
             res.status(201).end();
         } catch (error) {
-            next(error);
+            if (error instanceof ValidationError) {
+                res.status(400).json({"message": error.message});
+            } else {
+                next(error);
+            }
         }
 
     } else {
-        res.status(400).json("Missing information!");
+        res.status(400).json({"message": "Missing information."});
     }
 
 });
