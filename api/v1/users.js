@@ -43,12 +43,20 @@ router.get('/:id/accounts', async function(req, res, next) {
 
     let id = req.params.id;
 
-    try {
-        const user = await User.query().where('id', id);
-        const accounts = await user.$relatedQuery('accounts');
-        res.json(accounts);
-    } catch (error) {
-        next(error);
+    if (isNaN(id)) {
+        res.status(400).json({"message": "A user ID is a number."});
+    } else {
+        try {
+            const user = await User.query().where('id', id).first();
+            if (user === undefined) {
+                res.status(404).end();
+            } else {
+                const accounts = await user.$relatedQuery('accounts');
+                res.json(accounts);
+            }
+        } catch (error) {
+            next(error);
+        }
     }
 
 });
