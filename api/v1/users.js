@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-//Load required models
+//Load required models and error objects
 const User = require('../../models/User.js');
+const { ValidationError } = require('objection');
 
 //GET /api/users -- Get a list of users.
 router.get('/', async function(req, res, next) {
@@ -76,14 +77,17 @@ router.post('/', async function(req, res, next) {
             await User.query().insert(user);
             res.status(201).end();
         } catch (error) {
-            next(error);
+            if (error instanceof ValidationError) {
+                res.status(400).json({"message": error.message});
+            } else {
+                next(error);
+            }
         }
 
     } else {
-        res.status(400).json("Missing information!");
+        res.status(400).json({"message": "Missing user name or password."});
     }
 
 });
-
 
 module.exports = router;
