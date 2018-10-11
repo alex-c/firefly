@@ -1,34 +1,34 @@
 {
-  "name": "firefly",
-  "version": "0.1.0",
-  "description": "Keep flying by budgeting and tracking expenses.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/alex-c/firefly.git"
-  },
-  "keywords": [
-    "budgeting",
-    "expense-tracker",
-    "expense-manager"
-  ],
-  "author": "Alexandre Charoy <alexandre.charoy@gmail.com>",
-  "license": "GPL-3.0",
-  "bugs": {
-    "url": "https://github.com/alex-c/firefly/issues"
-  },
-  "homepage": "https://github.com/alex-c/firefly#readme",
-  "dependencies": {
-    "config": "^1.30.0",
-    "express": "^4.16.3",
-    "jsonwebtoken": "^8.3.0",
-    "knex": "^0.14.6",
-    "objection": "^1.1.10",
-    "objection-guid": "^3.0.1",
-    "objection-password": "^1.0.0",
-    "pg": "^7.4.3"
-  }
+    "name": "firefly",
+    "version": "0.1.0",
+    "description": "Keep flying by budgeting and tracking expenses.",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/alex-c/firefly.git"
+    },
+    "keywords": [
+        "budgeting",
+        "expense-tracker",
+        "expense-manager"
+    ],
+    "author": "Alexandre Charoy <alexandre.charoy@gmail.com>",
+    "license": "GPL-3.0",
+    "bugs": {
+        "url": "https://github.com/alex-c/firefly/issues"
+    },
+    "homepage": "https://github.com/alex-c/firefly#readme",
+    "dependencies": {
+        "config": "^2.0.1",
+        "express": "^4.16.3",
+        "jsonwebtoken": "^8.3.0",
+        "knex": "^0.15.2",
+        "objection": "^1.1.10",
+        "objection-guid": "^3.0.1",
+        "objection-password": "^2.0.0",
+        "pg": "^7.4.3"
+    }
 }
