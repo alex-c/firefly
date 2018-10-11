@@ -16,6 +16,28 @@ router.get('/', async function(req, res, next) {
 
 });
 
+//GET /api/users/{id} -- Get a specific user.
+router.get('/:id', async function(req, res, next) {
+
+    let id = req.params.id;
+
+    if (isNaN(id)) {
+        res.status(400).json({"message": "A user ID is a number."});
+    } else {
+        try {
+            const user = await User.query().where('id', id).first();
+            if (user === undefined) {
+                res.status(404).end();
+            } else {
+                res.json(user);
+            }
+        } catch (error) {
+            next(error);
+        }
+    }
+
+});
+
 //GET /api/users/accounts -- Get a user's accounts.
 router.get('/:id/accounts', async function(req, res, next) {
 
