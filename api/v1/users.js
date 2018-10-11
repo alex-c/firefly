@@ -25,6 +25,7 @@ router.get('/:id', async function(req, res, next) {
     if (isNaN(id)) {
         res.status(400).json({"message": "A user ID is a number."});
     } else {
+
         try {
             const user = await User.query().where('id', id).first();
             if (user === undefined) {
@@ -35,6 +36,7 @@ router.get('/:id', async function(req, res, next) {
         } catch (error) {
             next(error);
         }
+
     }
 
 });
@@ -47,6 +49,7 @@ router.get('/:id/accounts', async function(req, res, next) {
     if (isNaN(id)) {
         res.status(400).json({"message": "A user ID is a number."});
     } else {
+
         try {
             const user = await User.query().where('id', id).first();
             if (user === undefined) {
@@ -58,6 +61,7 @@ router.get('/:id/accounts', async function(req, res, next) {
         } catch (error) {
             next(error);
         }
+        
     }
 
 });
