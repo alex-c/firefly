@@ -97,31 +97,36 @@ router.get('/:id/accounts', async function(req, res, next) {
 //PUT /api/users/{id}/accounts -- Set whether a user as access to an account.
 router.put('/:id/accounts', async function(req, res, next) {
 
-        if (req.params.userId && req.params.accountId && req.params.userHasAccess) {
+    if (req.params.id && req.body.accountId && req.body.canSee !== undefined && req.body.canBookTransaction !== undefined) {
 
-            let accountAccess = {
-                user_id = req.params.id;
-                account_id = req.body.accountId;
-                can_see = true;
-                can_book_transaction = true;
-            }
+        let userId = req.params.id;
+        let accountAccess = {
+            id: req.body.accountId,
+            can_see: req.body.canSee,
+            can_book_transaction: req.body.canBookTransaction
+        };
+
+        if (isNaN(userId) || isNaN(accountAccess.id)) {
+            res.status(400).json({"message": "User and account IDs should be numbers."});
+        } else {
 
             try {
-                const user = await User.query().where('id', id).first();
+                const user = await User.query().where('id', userId).first();
                 if (user === undefined) {
                     res.status(404).end();
                 } else {
-                    await user.$relatedQuery('accounts').insert(accountAccess);
-                    res.json(accounts);
+                    await user.$relatedQuery('accounts').relate(accountAccess);
+                    res.status(200).end();
                 }
             } catch (error) {
                 next(error);
             }
 
-        } else {
-            res.status(400).json({"message": "Missing information."});
         }
 
-}
+    } else {
+        res.status(400).json({"message": "Missing information."});
+    }
+});
 
 module.exports = router;

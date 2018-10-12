@@ -39,7 +39,8 @@ class User extends password(Model) {
                     from: 'users.id',
                     through: {
                         from: 'account_access.user_id',
-                        to: 'account_access.account_id'
+                        to: 'account_access.account_id',
+                        extra: ['can_see', 'can_book_transaction']
                     },
                     to: 'accounts.id'
                 }
