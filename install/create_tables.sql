@@ -2,14 +2,14 @@
 
 CREATE TABLE users (
     id serial PRIMARY KEY,
-    name varchar (255) NOT NULL,
+    name varchar (255) NOT NULL UNIQUE,
     password varchar (255) NOT NULL,
     is_admin boolean DEFAULT false
 );
 
 CREATE TABLE accounts (
     id serial PRIMARY KEY,
-    name varchar (255) NOT NULL,
+    name varchar (255) NOT NULL UNIQUE,
     balance real DEFAULT 0
 );
 
