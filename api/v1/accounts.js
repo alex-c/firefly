@@ -50,11 +50,14 @@ router.post('/', isAdmin, async function(req, res, next) {
 
     if (req.body.name) {
 
-        let balance = req.body.balance || 0;
+        let account = {
+            name: req.body.name,
+            balance: req.body.balance || 0
+        }
 
         try {
-            await Account.query().insert({name: req.body.name, balance});
-            res.status(201).end();
+            account = await Account.query().insert(account);
+            res.status(201).json(account);
         } catch (error) {
             if (error instanceof ValidationError) {
                 res.status(400).json({"message": error.message});
@@ -139,7 +142,7 @@ router.post('/:id/transactions', async function(req, res, next) {
                     let newBalance = account.balance + transaction.value;
                     await Account.query().patchAndFetchById(transaction.account, {balance: newBalance});
                     //Return new transaction ID
-                    res.status(201).json({transaction: transaction.id});
+                    res.status(201).json(transaction);
                 } else {
                     res.status(404).end();
                 }

@@ -56,8 +56,8 @@ router.post('/', isAdmin, async function(req, res, next) {
         }
 
         try {
-            await User.query().insert(user);
-            res.status(201).end();
+            user = await User.query().insert(user);
+            res.status(201).json(user);
         } catch (error) {
             if (error instanceof ValidationError) {
                 res.status(400).json({"message": error.message});
