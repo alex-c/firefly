@@ -142,7 +142,9 @@ router.delete('/:id', async function(req, res, next) {
         try {
             //Remove access rights to accounts
             const user = await User.query().where('id', id).first();
-            await user.$relatedQuery('accounts').unrelate();
+            if (user !== undefined) {
+                await user.$relatedQuery('accounts').unrelate();
+            }
             //Delete user
             await User.query().delete().where('id', id);
             res.end();
