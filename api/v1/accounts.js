@@ -123,7 +123,7 @@ router.post('/:id/transactions', async function(req, res, next) {
         let transaction = {
             account: req.params.id,
             value: req.body.value,
-            created_at: new Date().toISOString()
+            created_at: req.body.createdAt || new Date().toISOString()
         }
 
         if (isNaN(transaction.account)) {
