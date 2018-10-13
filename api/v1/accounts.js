@@ -29,10 +29,10 @@ router.get('/:id', async function(req, res, next) {
 
         try {
             const account = await Account.query().where('id', id).first();
-            if (account === undefined) {
-                res.status(404).end();
-            } else {
+            if (account !== undefined) {
                 res.json(account);
+            } else {
+                res.status(404).end();
             }
         } catch (error) {
             next(error);

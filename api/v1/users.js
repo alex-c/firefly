@@ -28,10 +28,10 @@ router.get('/:id', async function(req, res, next) {
 
         try {
             const user = await User.query().where('id', id).first();
-            if (user === undefined) {
-                res.status(404).end();
-            } else {
+            if (user !== undefined) {
                 res.json(user);
+            } else {
+                res.status(404).end();
             }
         } catch (error) {
             next(error);
@@ -80,11 +80,11 @@ router.get('/:id/accounts', async function(req, res, next) {
 
         try {
             const user = await User.query().where('id', id).first();
-            if (user === undefined) {
-                res.status(404).end();
-            } else {
+            if (user !== undefined) {
                 const accounts = await user.$relatedQuery('accounts');
                 res.json(accounts);
+            } else {
+                res.status(404).end();
             }
         } catch (error) {
             next(error);
@@ -112,12 +112,12 @@ router.put('/:id/accounts', async function(req, res, next) {
 
             try {
                 const user = await User.query().where('id', userId).first();
-                if (user === undefined) {
-                    res.status(404).end();
-                } else {
+                if (user !== undefined) {
                     await user.$relatedQuery('accounts').unrelate().where('account_id', accountAccess.id);
                     await user.$relatedQuery('accounts').relate(accountAccess);
                     res.status(200).end();
+                } else {
+                    res.status(404).end();
                 }
             } catch (error) {
                 next(error);

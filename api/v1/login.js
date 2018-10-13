@@ -14,7 +14,7 @@ async function login(req, res, next) {
 
         try {
             const user = await User.query().where('name', name).first();
-            if (user) {
+            if (user !== undefined) {
                 const passwordValid = await user.verifyPassword(password);
                 if (passwordValid) {
 
