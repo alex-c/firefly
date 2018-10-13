@@ -104,7 +104,7 @@ router.get('/:id/transactions', async function(req, res, next) {
         } else {
 
             try {
-                const transactions = await Transaction.query().where('account', id);
+                const transactions = await Transaction.query().where('account', id).orderBy('created_at', 'desc');
                 res.json(transactions);
             } catch (error) {
                 next(error);
