@@ -15,7 +15,7 @@ app.use(function (req, res, next) {
 });
 
 //Expose API
-app.use('/api', require('./api/v1/index.js'));
+app.use('/api', require('./api/index.js'));
 
 //Error handling
 app.use(function (err, req, res, next) {
