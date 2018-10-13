@@ -17,6 +17,30 @@ router.get('/', async function(req, res, next) {
 
 });
 
+//GET /api/accounts -- Get a specific account.
+router.get('/:id', async function(req, res, next) {
+
+    let id = req.params.id;
+
+    if (isNaN(id)) {
+        res.status(400).json({"message": "An account ID is a number."});
+    } else {
+
+        try {
+            const account = await Account.query().where('id', id).first();
+            if (account === undefined) {
+                res.status(404).end();
+            } else {
+                res.json(account);
+            }
+        } catch (error) {
+            next(error);
+        }
+
+    }
+
+});
+
 //POST /api/accounts -- Create an account.
 router.post('/', async function(req, res, next) {
 
