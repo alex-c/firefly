@@ -16,7 +16,8 @@ CREATE TABLE accounts (
 CREATE TABLE transactions (
     id UUID,
     value real,
-    account integer REFERENCES accounts
+    account integer REFERENCES accounts,
+    created_at timestamptz
 );
 
 CREATE TABLE account_access (

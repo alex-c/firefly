@@ -21,7 +21,8 @@ class Transaction extends guid(Model) {
             required: ['value'],
             properties: {
                 id: {type: 'guid'},
-                value: {type: 'real'}
+                value: {type: 'real'},
+                created_at: {type: 'date-time'}
             }
         };
     }

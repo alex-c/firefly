@@ -120,19 +120,25 @@ router.post('/:id/transactions', async function(req, res, next) {
 
     if (req.params.id && req.body.value) {
 
-        let id = req.params.id;
-        let value = req.body.value;
+        let transaction = {
+            account: req.params.id,
+            value: req.body.value,
+            created_at: new Date().toISOString()
+        }
 
-        if (isNaN(id)) {
+        if (isNaN(transaction.account)) {
             res.status(400).json({"message": "An account ID is a number."});
         } else {
 
             try {
-                const account = await Account.query().where('id', id).first();
+                const account = await Account.query().where('id', transaction.account).first();
                 if (account !== undefined) {
-                    let newBalance = account.balance + value;
-                    const transaction = await Transaction.query().insert({account: id, value});
-                    await Account.query().patchAndFetchById(id, {balance: newBalance});
+                    //Store transaction
+                    transaction = await Transaction.query().insert(transaction);
+                    //Update account balance
+                    let newBalance = account.balance + transaction.value;
+                    await Account.query().patchAndFetchById(transaction.account, {balance: newBalance});
+                    //Return new transaction ID
                     res.status(201).json({transaction: transaction.id});
                 } else {
                     res.status(404).end();
