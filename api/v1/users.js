@@ -130,4 +130,28 @@ router.put('/:id/accounts', async function(req, res, next) {
     }
 });
 
+//DELETE /api/users/{id} -- Delete a specific user.
+router.delete('/:id', async function(req, res, next) {
+
+    let id = req.params.id;
+
+    if (isNaN(id)) {
+        res.status(400).json({"message": "A user ID is a number."});
+    } else {
+
+        try {
+            //Remove access rights to accounts
+            const user = await User.query().where('id', id).first();
+            await user.$relatedQuery('accounts').unrelate();
+            //Delete user
+            await User.query().delete().where('id', id);
+            res.end();
+        } catch (error) {
+            next(error);
+        }
+
+    }
+
+});
+
 module.exports = router;
