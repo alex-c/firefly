@@ -115,6 +115,7 @@ router.put('/:id/accounts', async function(req, res, next) {
                 if (user === undefined) {
                     res.status(404).end();
                 } else {
+                    await user.$relatedQuery('accounts').unrelate().where('account_id', accountAccess.id);
                     await user.$relatedQuery('accounts').relate(accountAccess);
                     res.status(200).end();
                 }
