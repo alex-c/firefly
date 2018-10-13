@@ -3,6 +3,7 @@ const router = express.Router();
 
 //Load required models and error objects
 const Account = require('../../models/Account.js');
+const Transaction = require('../../models/Transaction.js');
 const { ValidationError } = require('objection');
 
 //GET /api/accounts -- Get a list of accounts.
@@ -81,6 +82,66 @@ router.delete('/:id', async function(req, res, next) {
             next(error);
         }
 
+    }
+
+});
+
+//GET /api/accounts/{id}/transactions -- Get a list of transactions.
+router.get('/:id/transactions', async function(req, res, next) {
+
+    if (req.params.id) {
+
+        let id = req.params.id;
+
+        if (isNaN(id)) {
+            res.status(400).json({"message": "An account ID is a number."});
+        } else {
+
+            try {
+                const transactions = await Transaction.query().where('account', id);
+                res.json(transactions);
+            } catch (error) {
+                next(error);
+            }
+
+        }
+
+    } else {
+        res.status(400).json("Missing information!");
+    }
+
+});
+
+//POST /api/accounts/{id}/transactions -- Book a transaction.
+router.post('/:id/transactions', async function(req, res, next) {
+
+    if (req.params.id && req.body.value) {
+
+        let id = req.params.id;
+        let value = req.body.value;
+
+        if (isNaN(id)) {
+            res.status(400).json({"message": "An account ID is a number."});
+        } else {
+
+            try {
+                const account = await Account.query().where('id', id).first();
+                if (account !== undefined) {
+                    let newBalance = account.balance + value;
+                    const transaction = await Transaction.query().insert({account: id, value});
+                    await Account.query().patchAndFetchById(id, {balance: newBalance});
+                    res.status(201).json({transaction: transaction.id});
+                } else {
+                    res.status(404).end();
+                }
+            } catch (error) {
+                next(error);
+            }
+
+        }
+
+    } else {
+        res.status(400).json("Missing information!");
     }
 
 });
