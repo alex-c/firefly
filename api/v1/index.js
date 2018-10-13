@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 //Authorization middleware
-let authorize = require('../../middleware/authorize.js')
+let authorize = require('../../middleware/authorize.js');
 
 //Login route, publicly available
 router.use('/login', require('./login.js'));

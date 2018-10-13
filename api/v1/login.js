@@ -21,7 +21,7 @@ async function login(req, res, next) {
                     //Create JWT
                     const payload = {
                         user: user.name,
-                        is_admin: user.isAdmin
+                        isAdmin: user.is_admin
                     };
                     const token = jwt.sign(payload, config.get('secret'));
 

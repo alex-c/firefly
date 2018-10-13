@@ -6,6 +6,9 @@ const Account = require('../../models/Account.js');
 const Transaction = require('../../models/Transaction.js');
 const { ValidationError } = require('objection');
 
+//Authorization middleware
+let isAdmin = require('../../middleware/authorization/isAdmin.js');
+
 //GET /api/accounts -- Get a list of accounts.
 router.get('/', async function(req, res, next) {
 
@@ -43,7 +46,7 @@ router.get('/:id', async function(req, res, next) {
 });
 
 //POST /api/accounts -- Create an account.
-router.post('/', async function(req, res, next) {
+router.post('/', isAdmin, async function(req, res, next) {
 
     if (req.body.name) {
 
@@ -67,7 +70,7 @@ router.post('/', async function(req, res, next) {
 });
 
 //DELETE /api/accounts/{id} -- Delete a specific account.
-router.delete('/:id', async function(req, res, next) {
+router.delete('/:id', isAdmin, async function(req, res, next) {
 
     let id = req.params.id;
 
