@@ -24,4 +24,4 @@ function authorize(req, res, next) {
     }
 }
 
-module.exports = AuthModule;
+module.exports = authorize;
