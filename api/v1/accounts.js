@@ -65,5 +65,24 @@ router.post('/', async function(req, res, next) {
 
 });
 
+//DELETE /api/accounts/{id} -- Delete a specific account.
+router.delete('/:id', async function(req, res, next) {
+
+    let id = req.params.id;
+
+    if (isNaN(id)) {
+        res.status(400).json({"message": "An account ID is a number."});
+    } else {
+
+        try {
+            await Account.query().delete().where('id', id);
+            res.end();
+        } catch (error) {
+            next(error);
+        }
+
+    }
+
+});
 
 module.exports = router;
