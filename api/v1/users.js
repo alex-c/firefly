@@ -8,7 +8,7 @@ const { ValidationError } = require('objection');
 //Authorization middleware
 let isAdmin = require('../../middleware/authorization/isAdmin.js');
 
-//GET /api/users -- Get a list of users.
+//GET /users -- Get a list of users.
 router.get('/', async function(req, res, next) {
 
     try {
@@ -20,7 +20,7 @@ router.get('/', async function(req, res, next) {
 
 });
 
-//GET /api/users/{id} -- Get a specific user.
+//GET /users/{id} -- Get a specific user.
 router.get('/:id', async function(req, res, next) {
 
     let id = req.params.id;
@@ -44,7 +44,7 @@ router.get('/:id', async function(req, res, next) {
 
 });
 
-//POST /api/users -- Create a user.
+//POST /users -- Create a user.
 router.post('/', isAdmin, async function(req, res, next) {
 
     if (req.body.name && req.body.password) {
@@ -72,7 +72,7 @@ router.post('/', isAdmin, async function(req, res, next) {
 
 });
 
-//GET /api/users/{id}/accounts -- Get a user's accounts.
+//GET /users/{id}/accounts -- Get a user's accounts.
 router.get('/:id/accounts', async function(req, res, next) {
 
     let id = req.params.id;
@@ -97,7 +97,7 @@ router.get('/:id/accounts', async function(req, res, next) {
 
 });
 
-//PUT /api/users/{id}/accounts -- Set whether a user as access to an account.
+//PUT /users/{id}/accounts -- Set whether a user as access to an account.
 router.put('/:id/accounts', isAdmin, async function(req, res, next) {
 
     if (req.params.id && req.body.accountId && req.body.canSee !== undefined && req.body.canBookTransaction !== undefined) {
@@ -133,7 +133,7 @@ router.put('/:id/accounts', isAdmin, async function(req, res, next) {
     }
 });
 
-//DELETE /api/users/{id} -- Delete a specific user.
+//DELETE /users/{id} -- Delete a specific user.
 router.delete('/:id', isAdmin, async function(req, res, next) {
 
     let id = req.params.id;
