@@ -3,13 +3,14 @@ const router = express.Router();
 
 //Load required models and error objects
 const Account = require('../../models/Account.js');
+const Category = require('../../models/Category.js');
 const Transaction = require('../../models/Transaction.js');
 const { ValidationError } = require('objection');
 
 //Authorization middleware
 let authorizeAdmin = require('./middleware/authorizeAdmin.js');
 
-//GET /api/accounts -- Get a list of accounts.
+//GET /accounts -- Get a list of accounts.
 router.get('/', async function(req, res, next) {
 
     try {
@@ -21,7 +22,7 @@ router.get('/', async function(req, res, next) {
 
 });
 
-//GET /api/accounts -- Get a specific account.
+//GET /accounts -- Get a specific account.
 router.get('/:id', async function(req, res, next) {
 
     let id = req.params.id;
@@ -45,7 +46,7 @@ router.get('/:id', async function(req, res, next) {
 
 });
 
-//POST /api/accounts -- Create an account.
+//POST /accounts -- Create an account.
 router.post('/', authorizeAdmin, async function(req, res, next) {
 
     if (req.body.name) {
@@ -72,7 +73,7 @@ router.post('/', authorizeAdmin, async function(req, res, next) {
 
 });
 
-//DELETE /api/accounts/{id} -- Delete a specific account.
+//DELETE /accounts/{id} -- Delete a specific account.
 router.delete('/:id', authorizeAdmin, async function(req, res, next) {
 
     let id = req.params.id;
@@ -92,7 +93,69 @@ router.delete('/:id', authorizeAdmin, async function(req, res, next) {
 
 });
 
-//GET /api/accounts/{id}/transactions -- Get a list of transactions.
+//GET /accounts/{id}/categories -- Get a list of transaction categories available on this account.
+router.get('/:id/categories', async function(req, res, next) {
+
+    if (req.params.id) {
+
+        let id = req.params.id;
+
+        if (isNaN(id)) {
+            res.status(400).json({"message": "A category ID is a number."});
+        } else {
+
+            try {
+                const categories = await Category.query().where('account', id);
+                res.json(categories);
+            } catch (error) {
+                next(error);
+            }
+
+        }
+
+    } else {
+        res.status(400).json("Missing information!");
+    }
+
+});
+
+//POST /accounts/{id}/categories -- Create a transaction category for this account.
+router.post('/:id/categories', async function(req, res, next) {
+
+    if (req.params.id && req.body.name) {
+
+        let category = {
+            account: req.params.id,
+            name: req.body.name
+        }
+
+        if (isNaN(category.account)) {
+            res.status(400).json({"message": "A category ID is a number."});
+        } else {
+
+            try {
+                const account = await Account.query().where('id', category.account).first();
+                if (account !== undefined) {
+                    //Store category
+                    category = await Category.query().insert(category);
+                    //Return new category
+                    res.status(201).json(category);
+                } else {
+                    res.status(404).end();
+                }
+            } catch (error) {
+                next(error);
+            }
+
+        }
+
+    } else {
+        res.status(400).json("Missing information!");
+    }
+
+});
+
+//GET /accounts/{id}/transactions -- Get a list of transactions for this account.
 router.get('/:id/transactions', async function(req, res, next) {
 
     if (req.params.id) {
@@ -118,7 +181,7 @@ router.get('/:id/transactions', async function(req, res, next) {
 
 });
 
-//POST /api/accounts/{id}/transactions -- Book a transaction.
+//POST /accounts/{id}/transactions -- Book a transaction to this account.
 router.post('/:id/transactions', async function(req, res, next) {
 
     if (req.params.id && req.body.value) {
@@ -141,7 +204,7 @@ router.post('/:id/transactions', async function(req, res, next) {
                     //Update account balance
                     let newBalance = account.balance + transaction.value;
                     await Account.query().patchAndFetchById(transaction.account, {balance: newBalance});
-                    //Return new transaction ID
+                    //Return new transaction
                     res.status(201).json(transaction);
                 } else {
                     res.status(404).end();

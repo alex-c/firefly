@@ -1,28 +1,26 @@
 const { Model } = require('objection');
-const guid = require('objection-guid')();
 
-//Defines a Firefly user
-class Transaction extends guid(Model) {
+//Defines a transactionc ategory
+class Category extends Model {
 
     //Table name
     static get tableName() {
-        return 'transactions';
+        return 'categories';
     }
 
-    //ID column
+    //Composite ID
     static get idColumn() {
-        return 'id';
+        return ['account_id', 'name'];
     }
 
     //Schema
-    static get jsonSchema() {
+    static get jsonSchema () {
         return {
             type: 'object',
-            required: ['value'],
+            required: ['account_id', 'name'],
             properties: {
-                id: {type: 'guid'},
-                value: {type: 'real'},
-                created_at: {type: 'date-time'}
+                account_id: {type: 'integer'},
+                name: {type: 'string', minLength: 3, maxLength: 255}
             }
         };
     }
@@ -31,11 +29,11 @@ class Transaction extends guid(Model) {
     static get relationMappings() {
         const Account = require('./Account.js');
         return {
-            transaction: {
+            account: {
                 relation: Model.BelongsToOneRelation,
                 modelClass: Account,
                 join: {
-                    from: 'transactions.account',
+                    from: 'categories.account',
                     to: 'accounts.id'
                 }
             }
@@ -43,5 +41,3 @@ class Transaction extends guid(Model) {
     }
 
 }
-
-module.exports = Transaction;
