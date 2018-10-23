@@ -10,7 +10,7 @@ class TransactionCategory extends Model {
 
     //Composite ID
     static get idColumn() {
-        return ['account_id', 'name'];
+        return 'id';
     }
 
     //Schema

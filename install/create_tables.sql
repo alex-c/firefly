@@ -13,13 +13,6 @@ CREATE TABLE accounts (
     balance real DEFAULT 0
 );
 
-CREATE TABLE transactions (
-    id UUID,
-    value real,
-    account_id integer REFERENCES accounts,
-    created_at timestamptz
-);
-
 CREATE TABLE account_access (
     user_id integer REFERENCES users,
     account_id integer REFERENCES accounts,
@@ -28,7 +21,15 @@ CREATE TABLE account_access (
 );
 
 CREATE TABLE transaction_categories (
+    id serial PRIMARY KEY,
     account_id integer REFERENCES accounts,
-    name varchar (255) NOT NULL,
-    PRIMARY KEY(account_id, name)
+    name varchar (255) NOT NULL
+);
+
+CREATE TABLE transactions (
+    id UUID,
+    value real,
+    account_id integer REFERENCES accounts,
+    category_id integer REFERENCES transaction_categories,
+    created_at timestamptz
 );

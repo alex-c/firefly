@@ -191,7 +191,8 @@ router.post('/:id/transactions', async function(req, res, next) {
         let transaction = {
             account_id: req.params.id,
             value: req.body.value,
-            created_at: req.body.createdAt || new Date().toISOString()
+            created_at: req.body.createdAt || new Date().toISOString(),
+            category_id: req.body.category || null
         }
 
         if (isNaN(transaction.account_id)) {
