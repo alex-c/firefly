@@ -27,7 +27,7 @@ CREATE TABLE account_access (
     can_book_transaction boolean DEFAULT false
 );
 
-CREATE TABLE categories (
+CREATE TABLE transaction_categories (
     account_id integer REFERENCES accounts,
     name varchar (255) NOT NULL,
     PRIMARY KEY(account_id, name)

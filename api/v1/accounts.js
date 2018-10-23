@@ -3,7 +3,7 @@ const router = express.Router();
 
 //Load required models and error objects
 const Account = require('../../models/Account.js');
-const Category = require('../../models/Category.js');
+const TransactionCategory = require('../../models/TransactionCategory.js');
 const Transaction = require('../../models/Transaction.js');
 const { ValidationError } = require('objection');
 
@@ -105,7 +105,7 @@ router.get('/:id/categories', async function(req, res, next) {
         } else {
 
             try {
-                const categories = await Category.query().where('account', id);
+                const categories = await TransactionCategory.query().where('account', id);
                 res.json(categories);
             } catch (error) {
                 next(error);
@@ -137,7 +137,7 @@ router.post('/:id/categories', async function(req, res, next) {
                 const account = await Account.query().where('id', category.account).first();
                 if (account !== undefined) {
                     //Store category
-                    category = await Category.query().insert(category);
+                    category = await TransactionCategory.query().insert(category);
                     //Return new category
                     res.status(201).json(category);
                 } else {

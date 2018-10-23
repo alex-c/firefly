@@ -1,11 +1,11 @@
 const { Model } = require('objection');
 
 //Defines a transactionc ategory
-class Category extends Model {
+class TransactionCategory extends Model {
 
     //Table name
     static get tableName() {
-        return 'categories';
+        return 'transaction_categories';
     }
 
     //Composite ID
@@ -33,7 +33,7 @@ class Category extends Model {
                 relation: Model.BelongsToOneRelation,
                 modelClass: Account,
                 join: {
-                    from: 'categories.account',
+                    from: 'transaction_categories.account',
                     to: 'accounts.id'
                 }
             }
@@ -42,4 +42,4 @@ class Category extends Model {
 
 }
 
-module.exports = Category;
+module.exports = TransactionCategory;
