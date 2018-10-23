@@ -16,7 +16,7 @@ CREATE TABLE accounts (
 CREATE TABLE transactions (
     id UUID,
     value real,
-    account integer REFERENCES accounts,
+    account_id integer REFERENCES accounts,
     created_at timestamptz
 );
 

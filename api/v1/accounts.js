@@ -105,7 +105,7 @@ router.get('/:id/categories', async function(req, res, next) {
         } else {
 
             try {
-                const categories = await TransactionCategory.query().where('account', id);
+                const categories = await TransactionCategory.query().where('account_id', id);
                 res.json(categories);
             } catch (error) {
                 next(error);
@@ -125,16 +125,18 @@ router.post('/:id/categories', async function(req, res, next) {
     if (req.params.id && req.body.name) {
 
         let category = {
-            account: req.params.id,
+            account_id: req.params.id,
             name: req.body.name
         }
 
-        if (isNaN(category.account)) {
+        if (isNaN(category.account_id)) {
             res.status(400).json({"message": "A category ID is a number."});
         } else {
 
+            category.account_id = parseInt(category.account_id);
+
             try {
-                const account = await Account.query().where('id', category.account).first();
+                const account = await Account.query().where('id', category.account_id).first();
                 if (account !== undefined) {
                     //Store category
                     category = await TransactionCategory.query().insert(category);
@@ -167,7 +169,7 @@ router.get('/:id/transactions', async function(req, res, next) {
         } else {
 
             try {
-                const transactions = await Transaction.query().where('account', id).orderBy('created_at', 'desc');
+                const transactions = await Transaction.query().where('account_id', id).orderBy('created_at', 'desc');
                 res.json(transactions);
             } catch (error) {
                 next(error);
@@ -187,23 +189,23 @@ router.post('/:id/transactions', async function(req, res, next) {
     if (req.params.id && req.body.value) {
 
         let transaction = {
-            account: req.params.id,
+            account_id: req.params.id,
             value: req.body.value,
             created_at: req.body.createdAt || new Date().toISOString()
         }
 
-        if (isNaN(transaction.account)) {
+        if (isNaN(transaction.account_id)) {
             res.status(400).json({"message": "An account ID is a number."});
         } else {
 
             try {
-                const account = await Account.query().where('id', transaction.account).first();
+                const account = await Account.query().where('id', transaction.account_id).first();
                 if (account !== undefined) {
                     //Store transaction
                     transaction = await Transaction.query().insert(transaction);
                     //Update account balance
                     let newBalance = account.balance + transaction.value;
-                    await Account.query().patchAndFetchById(transaction.account, {balance: newBalance});
+                    await Account.query().patchAndFetchById(transaction.account_id, {balance: newBalance});
                     //Return new transaction
                     res.status(201).json(transaction);
                 } else {

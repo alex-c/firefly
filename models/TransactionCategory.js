@@ -33,7 +33,7 @@ class TransactionCategory extends Model {
                 relation: Model.BelongsToOneRelation,
                 modelClass: Account,
                 join: {
-                    from: 'transaction_categories.account',
+                    from: 'transaction_categories.account_id',
                     to: 'accounts.id'
                 }
             }
