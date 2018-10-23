@@ -1,7 +1,7 @@
 {
 	"_type": "export",
 	"__export_format": 3,
-	"__export_date": "2018-10-19T14:08:37.925Z",
+	"__export_date": "2018-10-23T22:22:51.325Z",
 	"__export_source": "insomnia.desktop.app:v6.0.2",
 	"resources": [
 		{
@@ -64,7 +64,7 @@
 			"authentication": {},
 			"body": {
 				"mimeType": "application/json",
-				"text": "{\n\t\"name\": \"test\",\n\t\"password\": \"testtest\"\n}"
+				"text": "{\n\t\"name\": \"alex\",\n\t\"password\": \"alexalex\"\n}"
 			},
 			"created": 1529077246476,
 			"description": "",
@@ -78,7 +78,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1529077246476,
 			"method": "POST",
-			"modified": 1539958091314,
+			"modified": 1540319676495,
 			"name": "login",
 			"parameters": [],
 			"parentId": "wrk_f7bd731912b046979770d154c805da92",
@@ -132,7 +132,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1529003295887,
 			"method": "GET",
-			"modified": 1539956263908,
+			"modified": 1540319677468,
 			"name": "/users",
 			"parameters": [],
 			"parentId": "fld_37150647e4c64cfbb9f37993a2614929",
@@ -169,7 +169,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1528981102882.3125,
 			"method": "POST",
-			"modified": 1539956444845,
+			"modified": 1540315093351,
 			"name": "/users",
 			"parameters": [],
 			"parentId": "fld_37150647e4c64cfbb9f37993a2614929",
@@ -198,7 +198,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1528992199384.6562,
 			"method": "GET",
-			"modified": 1539956220480,
+			"modified": 1540319678373,
 			"name": "/users/{id}",
 			"parameters": [],
 			"parentId": "fld_37150647e4c64cfbb9f37993a2614929",
@@ -208,7 +208,7 @@
 			"settingRebuildPath": true,
 			"settingSendCookies": true,
 			"settingStoreCookies": true,
-			"url": "{{ api  }}/users/3",
+			"url": "{{ api  }}/users/2",
 			"_type": "request"
 		},
 		{
@@ -227,7 +227,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1528981102832.3125,
 			"method": "DELETE",
-			"modified": 1539956218920,
+			"modified": 1540319679923,
 			"name": "/users/{id}",
 			"parameters": [],
 			"parentId": "fld_37150647e4c64cfbb9f37993a2614929",
@@ -278,7 +278,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1529008995293,
 			"method": "GET",
-			"modified": 1539957297371,
+			"modified": 1540333275580,
 			"name": "/accounts",
 			"parameters": [],
 			"parentId": "fld_8bb2ef78c79a4ac0bf8692cb9dbbecdf",
@@ -296,7 +296,7 @@
 			"authentication": {},
 			"body": {
 				"mimeType": "application/json",
-				"text": "{\n\t\"name\": \"blub\",\n\t\"balance\": 33.78\n}"
+				"text": "{\n\t\"name\": \"test\",\n\t\"balance\": 33.78\n}"
 			},
 			"created": 1529009039370,
 			"description": "",
@@ -320,7 +320,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1529006145590,
 			"method": "POST",
-			"modified": 1539441183228,
+			"modified": 1540333274232,
 			"name": "/accounts",
 			"parameters": [],
 			"parentId": "fld_8bb2ef78c79a4ac0bf8692cb9dbbecdf",
@@ -349,7 +349,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1529007570441.5,
 			"method": "GET",
-			"modified": 1539955947393,
+			"modified": 1540333274690,
 			"name": "/accounts/{id}",
 			"parameters": [],
 			"parentId": "fld_8bb2ef78c79a4ac0bf8692cb9dbbecdf",
@@ -378,7 +378,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1528981102894.8125,
 			"method": "GET",
-			"modified": 1539956277170,
+			"modified": 1540317224892,
 			"name": "/users/{id}/accounts",
 			"parameters": [],
 			"parentId": "fld_ae93dd8bacef435a88d69955f1881b95",
@@ -415,7 +415,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1528981102844.8125,
 			"method": "PUT",
-			"modified": 1539956112374,
+			"modified": 1540316399264,
 			"name": "/users/{id}/accounts",
 			"parameters": [],
 			"parentId": "fld_ae93dd8bacef435a88d69955f1881b95",
@@ -449,7 +449,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1529009894872,
 			"method": "GET",
-			"modified": 1539957971226,
+			"modified": 1540333273631,
 			"name": "/transactions",
 			"parameters": [],
 			"parentId": "fld_d2c99cf3faf64ec58f94ba9eef455b9d",
@@ -459,7 +459,7 @@
 			"settingRebuildPath": true,
 			"settingSendCookies": true,
 			"settingStoreCookies": true,
-			"url": "{{ api  }}/accounts/3/transactions",
+			"url": "{{ api  }}/accounts/1/transactions?category=1",
 			"_type": "request"
 		},
 		{
@@ -467,7 +467,7 @@
 			"authentication": {},
 			"body": {
 				"mimeType": "application/json",
-				"text": "{\n\t\"value\": -127.6\n}"
+				"text": "{\n\t\"value\": 44.55,\n\t\"category\": 2\n}"
 			},
 			"created": 1529009952841,
 			"description": "",
@@ -486,7 +486,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1529009894822,
 			"method": "POST",
-			"modified": 1539958022254,
+			"modified": 1540333273162,
 			"name": "/transactions",
 			"parameters": [],
 			"parentId": "fld_d2c99cf3faf64ec58f94ba9eef455b9d",
@@ -496,7 +496,7 @@
 			"settingRebuildPath": true,
 			"settingSendCookies": true,
 			"settingStoreCookies": true,
-			"url": "{{ api  }}/accounts/3/transactions",
+			"url": "{{ api  }}/accounts/1/transactions",
 			"_type": "request"
 		},
 		{
@@ -520,7 +520,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1529006145490,
 			"method": "GET",
-			"modified": 1539958062543,
+			"modified": 1540333254251,
 			"name": "/categories",
 			"parameters": [],
 			"parentId": "fld_73188d17dc844ab59c4f803ee1091ced",
@@ -530,7 +530,7 @@
 			"settingRebuildPath": true,
 			"settingSendCookies": true,
 			"settingStoreCookies": true,
-			"url": "{{ api  }}/accounts/3/categories",
+			"url": "{{ api  }}/accounts/1/categories",
 			"_type": "request"
 		},
 		{
@@ -538,7 +538,7 @@
 			"authentication": {},
 			"body": {
 				"mimeType": "application/json",
-				"text": "{\n\t\"name\": \"Food\"\n}"
+				"text": "{\n\t\"name\": \"WG Supplies\"\n}"
 			},
 			"created": 1539958024482,
 			"description": "",
@@ -557,7 +557,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1529006145440,
 			"method": "POST",
-			"modified": 1539958058305,
+			"modified": 1540333272184,
 			"name": "/categories",
 			"parameters": [],
 			"parentId": "fld_73188d17dc844ab59c4f803ee1091ced",
@@ -567,7 +567,7 @@
 			"settingRebuildPath": true,
 			"settingSendCookies": true,
 			"settingStoreCookies": true,
-			"url": "{{ api  }}/accounts/3/transactions",
+			"url": "{{ api  }}/accounts/1/categories",
 			"_type": "request"
 		}
 	]
