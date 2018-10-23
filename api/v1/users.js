@@ -6,7 +6,7 @@ const User = require('../../models/User.js');
 const { ValidationError } = require('objection');
 
 //Authorization middleware
-let isAdmin = require('../../middleware/authorization/isAdmin.js');
+let authorizeAdmin = require('./middleware/authorizeAdmin.js');
 
 //GET /users -- Get a list of users.
 router.get('/', async function(req, res, next) {
@@ -45,7 +45,7 @@ router.get('/:id', async function(req, res, next) {
 });
 
 //POST /users -- Create a user.
-router.post('/', isAdmin, async function(req, res, next) {
+router.post('/', authorizeAdmin, async function(req, res, next) {
 
     if (req.body.name && req.body.password) {
 
@@ -98,7 +98,7 @@ router.get('/:id/accounts', async function(req, res, next) {
 });
 
 //PUT /users/{id}/accounts -- Set whether a user as access to an account.
-router.put('/:id/accounts', isAdmin, async function(req, res, next) {
+router.put('/:id/accounts', authorizeAdmin, async function(req, res, next) {
 
     if (req.params.id && req.body.accountId && req.body.canSee !== undefined && req.body.canBookTransaction !== undefined) {
 
@@ -134,7 +134,7 @@ router.put('/:id/accounts', isAdmin, async function(req, res, next) {
 });
 
 //DELETE /users/{id} -- Delete a specific user.
-router.delete('/:id', isAdmin, async function(req, res, next) {
+router.delete('/:id', authorizeAdmin, async function(req, res, next) {
 
     let id = req.params.id;
 
