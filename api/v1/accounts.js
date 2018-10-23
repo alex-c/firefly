@@ -163,13 +163,19 @@ router.get('/:id/transactions', async function(req, res, next) {
     if (req.params.id) {
 
         let id = req.params.id;
+        let category = req.query.category || null;
 
         if (isNaN(id)) {
             res.status(400).json({"message": "An account ID is a number."});
         } else {
 
             try {
-                const transactions = await Transaction.query().where('account_id', id).orderBy('created_at', 'desc');
+                let transactions = null;
+                if (category !== null) {
+                    transactions = await Transaction.query().where('account_id', id).andWhere('category_id', category).orderBy('created_at', 'desc');
+                } else {
+                    transactions = await Transaction.query().where('account_id', id).orderBy('created_at', 'desc');
+                }
                 res.json(transactions);
             } catch (error) {
                 next(error);
