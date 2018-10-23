@@ -9,7 +9,7 @@ if (process.argv.length == 4) {
     console.log(`Attempting to create admin user '${user.name}' with password '${user.password}'.`);
 
     //Init DB connection
-    require('../db/init.js');
+    require('../db');
 
     //Get user model
     const User = require('../models/User.js');
