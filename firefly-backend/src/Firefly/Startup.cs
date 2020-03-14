@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Serilog;
 
 namespace Firefly
 {
@@ -44,6 +45,8 @@ namespace Firefly
         /// <param name="app">Application builder to configure the app through.</param>
         public void Configure(IApplicationBuilder app)
         {
+            app.UseSerilogRequestLogging();
+
             // Use MVC
             app.UseMvc();
         }
