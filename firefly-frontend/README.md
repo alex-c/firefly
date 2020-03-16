@@ -1,4 +1,6 @@
-# mts-frontend
+# Firefly Frontend
+
+This project contains a [Vue.js](https://vuejs.org/)-based frontend for the Firefly budgeting and expense tracking application!
 
 ## Scripts
 
