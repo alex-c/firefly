@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <div class="header">Theme Preview</div>
+    <div class="header">Firefly</div>
+    <el-row>Buttons preview:</el-row>
     <el-row>
       <el-button>Default</el-button>
       <el-button type="primary">Primary</el-button>
@@ -40,22 +41,24 @@
 @import './style/themes.scss';
 
 body {
+  font-family: 'Raleway', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   background-color: var($--theme-background);
   margin: 0;
 }
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: var($--theme-foreground);
+  color: var($--theme-text);
 }
 
 .header {
+  font-family: 'Lobster', cursive;
   background-color: var($--theme-primary);
+  color: var($--theme-foreground);
   padding: 18px;
-  font-size: 24px;
+  font-size: 32px;
 }
 
 .el-row {

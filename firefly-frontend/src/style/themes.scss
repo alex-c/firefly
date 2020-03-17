@@ -6,6 +6,7 @@ $theme-map-light: (
     $--theme-primary: $primary,
     $--theme-background: $light,
     $--theme-foreground: $light,
+    $--theme-text: $dark,
 );
 
 // Color map for dark theme
@@ -13,6 +14,7 @@ $theme-map-dark: (
     $--theme-primary: $primary,
     $--theme-background: $secondary,
     $--theme-foreground: $dark,
+    $--theme-text: $light,
 );
 
 // Light theme

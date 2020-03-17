@@ -1,0 +1,17 @@
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Raleway'), local('Raleway-Regular'),
+       url('./fonts/raleway-v14-latin-regular.woff2') format('woff2'),
+       url('./fonts/raleway-v14-latin-regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Lobster';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Lobster Regular'), local('Lobster-Regular'),
+       url('./fonts/lobster-v22-latin-regular.woff2') format('woff2'),
+       url('./fonts/lobster-v22-latin-regular.woff') format('woff');
+}
