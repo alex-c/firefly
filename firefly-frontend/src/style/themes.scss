@@ -1,0 +1,36 @@
+@import 'colors';
+@import 'mixins';
+
+// Color map for light theme
+$theme-map-light: (
+    $--theme-primary: $primary,
+    $--theme-background: $light,
+    $--theme-foreground: $light,
+);
+
+// Color map for dark theme
+$theme-map-dark: (
+    $--theme-primary: $primary,
+    $--theme-background: $secondary,
+    $--theme-foreground: $dark,
+);
+
+// Light theme
+:root.light {
+  @include spread-map($theme-map-light);
+}
+
+// Dark theme
+:root.dark {
+  @include spread-map($theme-map-dark);
+}
+
+// Customize Element UI Theme
+$--color-primary: $primary;
+$--color-info: $secondary-light;
+$--color-success: #409217;
+$--color-danger: $primary-dark;
+
+// Load ELement UI Theme
+$--font-path: '~element-ui/lib/theme-chalk/fonts';
+@import '~element-ui/packages/theme-chalk/src/index';
