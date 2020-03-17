@@ -3,8 +3,8 @@
     <div class="header">Firefly</div>
     <el-row>Buttons preview:</el-row>
     <el-row>
-      <el-button>Default</el-button>
-      <el-button type="primary">Primary</el-button>
+      <el-button icon="el-icon-user">Default</el-button>
+      <el-button icon="el-icon-* mdi mdi-home" type="primary">Primary</el-button>
       <el-button type="success">Success</el-button>
       <el-button type="info">Info</el-button>
       <el-button type="warning">Warning</el-button>

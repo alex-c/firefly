@@ -16,6 +16,7 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@mdi/font": "^5.0.45",
     "core-js": "^3.6.4",
     "element-ui": "^2.13.0",
     "vue": "^2.6.11",

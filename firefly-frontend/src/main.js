@@ -30,6 +30,9 @@ const i18n = new VueI18n({
   messages,
 });
 
+// Material Design Icons
+import '@mdi/font/css/materialdesignicons.min.css';
+
 // Mount app
 import App from './App.vue';
 new Vue({
