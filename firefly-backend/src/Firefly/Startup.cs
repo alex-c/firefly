@@ -1,8 +1,12 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Firefly.Repositories;
+using Firefly.Repositories.Mocked;
+using Firefly.Services;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
+using System;
 
 namespace Firefly
 {
@@ -11,7 +15,7 @@ namespace Firefly
         /// <summary>
         /// The hosting environment information.
         /// </summary>
-        private IHostingEnvironment Environment { get; }
+        private IWebHostEnvironment Environment { get; }
 
         /// <summary>
         /// The app configuration.
@@ -23,7 +27,7 @@ namespace Firefly
         /// </summary>
         /// <param name="configuration">App configuration.</param>
         /// <param name="environemnt">Hosting environment.</param>
-        public Startup(IConfiguration configuration, IHostingEnvironment environemnt)
+        public Startup(IConfiguration configuration, IWebHostEnvironment environemnt)
         {
             Configuration = configuration;
             Environment = environemnt;
@@ -35,8 +39,26 @@ namespace Firefly
         /// <param name="services">Service collection to extend.</param>
         public void ConfigureServices(IServiceCollection services)
         {
-            // Configure MVC
-            services.AddMvc();
+            // Set up repositories
+            if (Configuration.GetValue<bool>("Mocking:UseMockDataPersistence"))
+            {
+                if (Configuration.GetValue<bool>("Mocking:SeedWithMockDataOnStartup"))
+                {
+                    services.AddSingleton<MockDataProvider>();
+                }
+                services.AddSingleton<IUserRepository, MockUserRepository>();
+                services.AddSingleton<IReadOnlyUserRepository, MockUserRepository>();
+            }
+            else
+            {
+                // TODO: implement repositories for PostgreSQL persistence
+                throw new NotImplementedException("PostgreSQL-based persistence hasn't been implemented yet.");
+            }
+
+            services.AddSingleton<PasswordHashingService>();
+            services.AddSingleton<AuthService>();
+
+            services.AddControllers();
         }
 
         /// <summary>
@@ -46,9 +68,11 @@ namespace Firefly
         public void Configure(IApplicationBuilder app)
         {
             app.UseSerilogRequestLogging();
+            app.UseRouting();
 
-            // Use MVC
-            app.UseMvc();
+            app.UseEndpoints(endpoints => {
+                endpoints.MapControllers();
+            });
         }
     }
 }

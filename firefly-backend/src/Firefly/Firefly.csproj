@@ -3,18 +3,32 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Version>0.1.0</Version>
+    <Authors>Alexandre Charoy</Authors>
+    <PackageProjectUrl>https://github.com/alex-c/firefly#readme</PackageProjectUrl>
+    <PackageLicenseUrl></PackageLicenseUrl>
+    <Description>Keep flying by budgeting and tracking expenses!</Description>
+    <RepositoryUrl>https://github.com/alex-c/firefly.git</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageLicenseExpression>GNU GPL-v3</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Cryptography.KeyDerivation" Version="3.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
     <PackageReference Include="Serilog.AspNetCore" Version="3.2.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Repositories\" />
-    <Folder Include="Services\" />
+    <None Update="appsettings.Development.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
