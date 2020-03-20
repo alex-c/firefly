@@ -41,7 +41,7 @@ namespace Firefly.Controllers
         {
             if (loginRequest == null || loginRequest.Email == null || loginRequest.Password == null)
             {
-                return HandleBadRequest("A login name and password should be supplied for login requests.");
+                return HandleBadRequest("A user email and password should be supplied for login requests.");
             }
 
             try
