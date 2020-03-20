@@ -4,7 +4,8 @@
 // Color map for light theme
 $theme-map-light: (
     $--theme-primary: $primary,
-    $--theme-background: $light,
+    $--theme-primary-contrast: $light,
+    $--theme-background: #EFEFDF,
     $--theme-foreground: $light,
     $--theme-text: $dark,
 );
@@ -12,19 +13,20 @@ $theme-map-light: (
 // Color map for dark theme
 $theme-map-dark: (
     $--theme-primary: $primary,
-    $--theme-background: $secondary,
-    $--theme-foreground: $dark,
+    $--theme-primary-contrast: $dark,
+    $--theme-background: $secondary-dark,
+    $--theme-foreground: $secondary,
     $--theme-text: $light,
 );
+
+// Default (dark) theme
+:root {
+  @include spread-map($theme-map-dark);
+}
 
 // Light theme
 :root.light {
   @include spread-map($theme-map-light);
-}
-
-// Dark theme
-:root.dark {
-  @include spread-map($theme-map-dark);
 }
 
 // Customize Element UI Theme
@@ -36,3 +38,15 @@ $--color-danger: $primary-dark;
 // Load ELement UI Theme
 $--font-path: '~element-ui/lib/theme-chalk/fonts';
 @import '~element-ui/packages/theme-chalk/src/index';
+
+.el-form-item__label {
+  color: var($--theme-text);
+}
+
+.el-input__inner {
+  background-color: var($--theme-background);
+  border-color: var($--theme-foreground);
+  color: var($--theme-text);
+}
+
+// Import this once in main.js to apply theme root styles and Element UI theming!

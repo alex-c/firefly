@@ -1,2 +1,27 @@
 {
+  "general": {
+    "dashboard": "Dashboard",
+    "accounts": "Accounts",
+    "transactions": "Transactions",
+    "trends": "Trends",
+    "language": "Language",
+    "theme": "Theme"
+  },
+  "login": {
+    "welcome": "Welcome to Firefly!",
+    "login": "Login",
+    "footer": "Check out Firefly on Github!"
+  },
+  "user": {
+    "name": "User name",
+    "password": "Password"
+  },
+  "themes": {
+    "dark": "Dark",
+    "light": "Light"
+  },
+  "notFound": {
+    "title": "404 Not Found",
+    "message": "Whatever you are looking for, it's not here!"
+  }
 }

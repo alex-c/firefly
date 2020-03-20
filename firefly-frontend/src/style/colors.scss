@@ -3,11 +3,13 @@
 // Primary color shades
 $primary: #D93F63;
 $primary-light: #F36187;
-$primary-dark: #A90828;
+$primary-dark: #C32648;
+$primary-darkest: #A90828;
 
 //Secondary color shades
 $secondary: #213D55;
 $secondary-light: #315269;
+$secondary-lighter: #476F84;
 $secondary-dark: #162F48;
 
 // Light/dark for text over primary color
@@ -16,6 +18,9 @@ $dark: #051E37;
 
 // Variable names
 $--theme-primary: --theme-primary;
+$--theme-primary-contrast: --theme-primary-contrast;
 $--theme-background: --theme-background;
 $--theme-foreground: --theme-foreground;
 $--theme-text: --theme-text;
+
+// Import this into components to have access to color variables!
