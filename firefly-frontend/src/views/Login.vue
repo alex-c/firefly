@@ -5,25 +5,17 @@
     </Header>
     <div id="login-content">
       <Box>
-        <template v-slot:header>{{$t('login.welcome')}}</template>
+        <template v-slot:header>{{ $t('login.welcome') }}</template>
         <div>
-          <el-form>
-            <el-form-item>
-              <el-input v-model="loginForm.name" :placeholder="$t('user.name')"></el-input>
+          <el-form :model="loginForm" :rules="validationRules" ref="loginForm">
+            <el-form-item prop="email">
+              <el-input v-model="loginForm.email" :placeholder="$t('user.email')" prefix-icon="el-icon-user-solid" @keyup.enter.native="login" autofocus></el-input>
             </el-form-item>
-            <el-form-item>
-              <el-input
-                v-model="loginForm.password"
-                :placeholder="$t('user.password')"
-                show-password
-              ></el-input>
+            <el-form-item prop="password">
+              <el-input v-model="loginForm.password" :placeholder="$t('user.password')" prefix-icon="el-icon-lock" @keyup.enter.native="login" show-password></el-input>
             </el-form-item>
             <div id="login-button-container">
-              <el-button
-                type="primary"
-                icon="el-icon-* mdi mdi-login"
-                @click="login"
-              >{{$t('login.login')}}</el-button>
+              <el-button type="primary" icon="el-icon-* mdi mdi-login" @click="login">{{ $t('login.login') }}</el-button>
             </div>
           </el-form>
         </div>
@@ -31,7 +23,7 @@
       <div id="footer-text">
         <a href="https://www.github.com/alex-c/firefly">
           <span class="mdi mdi-github"></span>
-          {{$t('login.footer')}}
+          {{ $t('login.footer') }}
         </a>
       </div>
     </div>
@@ -40,17 +32,19 @@
 </template>
 
 <script>
+import ApiErrorHandlingMixin from '@/mixins/ApiErrorHandlingMixin.js';
 import Header from '@/components/Header.vue';
 import Settings from '@/views/Settings.vue';
 import Box from '@/components/Box.vue';
 
 export default {
   name: 'login',
+  mixins: [ApiErrorHandlingMixin],
   components: { Header, Settings, Box },
   data() {
     return {
       loginForm: {
-        name: '',
+        email: '',
         password: '',
       },
     };
@@ -59,10 +53,36 @@ export default {
     uiCollapsed() {
       return this.$store.state.ui.uiCollapsed;
     },
+    validationRules() {
+      return {
+        email: { required: true, message: this.$t('login.validation.email'), trigger: 'blur' },
+        password: { required: true, message: this.$t('login.validation.password'), trigger: 'blur' },
+      };
+    },
   },
   methods: {
     login: function() {
-      this.$api.testNamespace.testCall();
+      this.badLogin = false;
+      this.$refs['loginForm'].validate(valid => {
+        if (valid) {
+          this.$api
+            .login(this.loginForm.email, this.loginForm.password)
+            .then(response => {
+              const token = response.body.token;
+              this.$store.commit('login', token);
+              this.$router.push('/dashboard');
+            })
+            .catch(error => {
+              if (error.status === 401) {
+                this.badLogin = true; //TODO
+              } else {
+                this.handleApiError(error);
+              }
+            });
+        } else {
+          return false;
+        }
+      });
     },
   },
 };

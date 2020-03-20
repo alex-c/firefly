@@ -11,8 +11,21 @@ import Transactions from '@/views/pages/Transactions.vue';
 import Trends from '@/views/pages/Trends.vue';
 import NotFound from '@/views/pages/NotFound.vue';
 
+// Store
+import store from '../store/store.js';
+
 // Define routes
 const routes = [
+  {
+    path: '/',
+    beforeEnter: (_to, _from, next) => {
+      if (store.state.token === null) {
+        next({ path: '/login' });
+      } else {
+        next({ path: '/dashboard' });
+      }
+    },
+  },
   {
     path: '/login',
     component: Login,
@@ -20,6 +33,13 @@ const routes = [
   {
     path: '/dashboard',
     component: Private,
+    beforeEnter: function(_to, _from, next) {
+      if (store.state.token === null) {
+        next({ path: '/login' });
+      } else {
+        next();
+      }
+    },
     children: [
       {
         path: '/',

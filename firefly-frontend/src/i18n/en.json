@@ -1,5 +1,9 @@
 {
   "general": {
+    "networkError": "Network error: please check your connection to the OpenMTS server.",
+    "unexpecteError": "An unexpected error occured; please contact an administrator.",
+    "unauthorizedError": "You have been logged out because of missing authorization.",
+    "forbiddenError": "You are not authorized to do that.",
     "dashboard": "Dashboard",
     "accounts": "Accounts",
     "transactions": "Transactions",
@@ -10,10 +14,14 @@
   "login": {
     "welcome": "Welcome to Firefly!",
     "login": "Login",
-    "footer": "Check out Firefly on Github!"
+    "footer": "Check out Firefly on Github!",
+    "validation": {
+      "email": "Please enter an email.",
+      "password": "Please enter a password."
+    }
   },
   "user": {
-    "name": "User name",
+    "email": "Email",
     "password": "Password"
   },
   "themes": {
