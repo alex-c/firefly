@@ -11,7 +11,8 @@
     "transactions": "Transactions",
     "trends": "Trends",
     "language": "Language",
-    "theme": "Theme"
+    "theme": "Theme",
+    "save": "Save"
   },
   "login": {
     "welcome": "Welcome to Firefly!",
@@ -24,7 +25,19 @@
   },
   "user": {
     "email": "Email",
-    "password": "Password"
+    "name": "Name",
+    "password": "Password",
+    "profile": "Profile",
+    "changePassword": "Change password",
+    "oldPassword": "Old password",
+    "newPassword": "New password",
+    "repeat": "Repeat",
+    "validation": {
+      "oldPassword": "Please enter your old password.",
+      "newPassword": "Please enter your new password.",
+      "newPasswordRepeat": "Please repeat your new password.",
+      "passwordMatch": "The passwords don't match."
+    }
   },
   "themes": {
     "dark": "Dark",

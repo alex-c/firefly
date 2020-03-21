@@ -31,6 +31,7 @@ export default {
 
 .box-header {
   padding: 16px;
+  font-weight: bold;
   .mdi {
     margin-right: 6px;
     font-size: 18px;
@@ -43,5 +44,12 @@ export default {
 .box-content {
   border-top: 1px solid var($--theme-primary);
   padding: 16px;
+  .row {
+    margin-top: 8px;
+    overflow: auto;
+    &:first-child {
+      margin-top: 0;
+    }
+  }
 }
 </style>

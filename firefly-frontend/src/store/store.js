@@ -10,34 +10,34 @@ import ui from './modules/store.ui.js';
 
 // Load user data from local storage
 const token = localStorage.getItem('token');
-const user = localStorage.getItem('user');
+const email = localStorage.getItem('email');
 const name = localStorage.getItem('name');
 
 // Set up store
 export default new Vuex.Store({
   state: {
     token: token,
-    user: user,
+    email: email,
     name: name,
   },
   mutations: {
     login(state, token) {
       const decodedToken = jwtDecode(token);
-      const user = decodedToken.sub;
+      const email = decodedToken.sub;
       const name = decodedToken.name;
       state.token = token;
-      state.user = user;
+      state.email = email;
       state.name = name;
       localStorage.setItem('token', token);
-      localStorage.setItem('user', user);
+      localStorage.setItem('email', email);
       localStorage.setItem('name', name);
     },
     logout(state) {
       state.token = null;
-      state.user = null;
+      state.email = null;
       state.name = null;
       localStorage.removeItem('token');
-      localStorage.removeItem('user');
+      localStorage.removeItem('email');
       localStorage.removeItem('name');
     },
   },

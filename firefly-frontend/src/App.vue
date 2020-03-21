@@ -33,4 +33,12 @@ body {
 #app {
   text-align: center;
 }
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
 </style>
