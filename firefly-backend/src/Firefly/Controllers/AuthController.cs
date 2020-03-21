@@ -1,6 +1,5 @@
 ﻿using Firefly.Controllers.Contracts.Request;
 using Firefly.Controllers.Contracts.Responses;
-using Firefly.Models;
 using Firefly.Services;
 using Firefly.Services.Exceptions;
 using Microsoft.AspNetCore.Mvc;

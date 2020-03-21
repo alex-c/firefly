@@ -1,13 +1,16 @@
 ﻿using Firefly.Repositories;
 using Firefly.Repositories.Mocked;
 using Firefly.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using System;
+using System.Text;
 
 namespace Firefly
 {
@@ -60,6 +63,23 @@ namespace Firefly
                 }
             });
 
+            // Configure JWT-based authentication
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateLifetime = true,
+                        ValidateAudience = false,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = Configuration.GetValue<string>("Jwt:Issuer"),
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetValue<string>("Jwt:Secret")))
+                    };
+                });
+
+            services.AddAuthorization();
+
             // Set up repositories
             if (Configuration.GetValue<bool>("Mocking:UseMockDataPersistence"))
             {
@@ -78,6 +98,7 @@ namespace Firefly
 
             services.AddSingleton<PasswordHashingService>();
             services.AddSingleton<AuthService>();
+            services.AddSingleton<UserService>();
 
             services.AddControllers();
         }
@@ -92,6 +113,9 @@ namespace Firefly
             app.UseRouting();
 
             app.UseCors(LOCAL_DEVELOPMENT_CORS_POLICY);
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints => {
                 endpoints.MapControllers();
