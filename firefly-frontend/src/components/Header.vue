@@ -1,11 +1,12 @@
 <template>
   <header id="header">
-    <slot></slot>
+    <slot />
     <div id="header-buttons">
       <div class="header-button" @click="toggleSettings">
         <span class="mdi mdi-cog"></span>
       </div>
     </div>
+    <slot name="header-right" />
   </header>
 </template>
 

@@ -4,6 +4,8 @@
     "unexpecteError": "An unexpected error occured; please contact an administrator.",
     "unauthorizedError": "You have been logged out because of missing authorization.",
     "forbiddenError": "You are not authorized to do that.",
+    "account": "Account",
+    "logout": "Log out",
     "dashboard": "Dashboard",
     "accounts": "Accounts",
     "transactions": "Transactions",

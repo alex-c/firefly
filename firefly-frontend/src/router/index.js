@@ -5,6 +5,7 @@ Vue.use(VueRouter);
 // Views
 import Login from '@/views/Login.vue';
 import Private from '@/views/Private.vue';
+import UserAccount from '@/views/pages/UserAccount.vue';
 import Dashboard from '@/views/pages/Dashboard.vue';
 import Accounts from '@/views/pages/Accounts.vue';
 import Transactions from '@/views/pages/Transactions.vue';
@@ -44,6 +45,10 @@ const routes = [
       {
         path: '/',
         component: Dashboard,
+      },
+      {
+        path: '/user',
+        component: UserAccount,
       },
       {
         path: '/accounts',

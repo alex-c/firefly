@@ -24,7 +24,7 @@ export default new Vuex.Store({
     login(state, token) {
       const decodedToken = jwtDecode(token);
       const user = decodedToken.sub;
-      const name = decodedToken.sub;
+      const name = decodedToken.name;
       state.token = token;
       state.user = user;
       state.name = name;
