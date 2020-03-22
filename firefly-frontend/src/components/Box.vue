@@ -45,17 +45,21 @@ export default {
   border-top: 1px solid var($--theme-primary);
   padding: 16px;
   .row {
+    margin-top: 16px;
+    overflow: auto;
+    &:first-child {
+      margin-top: 0px;
+    }
+  }
+  .row-condensed {
     margin-top: 8px;
     overflow: auto;
     &:first-child {
       margin-top: 0px;
     }
   }
-  .row-doublepad {
-    margin-top: 16px;
-    &:first-child {
-      margin-top: 0px;
-    }
+  .row-nopad {
+    overflow: auto;
   }
 }
 </style>

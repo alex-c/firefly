@@ -1,10 +1,14 @@
 <template>
   <div id="view-login">
+    <!-- Page header -->
     <Header>
       <div id="header-title">Firefly</div>
     </Header>
+
+    <!-- Login page -->
     <div id="login-content">
       <Box>
+        <!-- Header and feedback -->
         <template v-slot:header>{{ $t('login.welcome') }}</template>
         <el-collapse-transition>
           <Alert
@@ -15,7 +19,9 @@
             v-on:close="badLogin = false"
           >{{$t('login.badLogin')}}</Alert>
         </el-collapse-transition>
-        <div class="row-doublepad">
+
+        <!-- Login form -->
+        <div class="row">
           <el-form :model="loginForm" :rules="validationRules" ref="loginForm">
             <el-form-item prop="email">
               <el-input
@@ -45,6 +51,8 @@
           </el-form>
         </div>
       </Box>
+
+      <!-- Page footer -->
       <div id="footer-text">
         <a href="https://www.github.com/alex-c/firefly">
           <span class="mdi mdi-github"></span>

@@ -38,7 +38,9 @@
       "newPassword": "Please enter your new password.",
       "newPasswordRepeat": "Please repeat your new password.",
       "passwordMatch": "The passwords don't match."
-    }
+    },
+    "badPassword": "The provided old password is wrong.",
+    "passwordChanged": "Password successfully changed!"
   },
   "themes": {
     "dark": "Dark",

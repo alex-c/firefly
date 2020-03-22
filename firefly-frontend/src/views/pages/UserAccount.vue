@@ -2,62 +2,84 @@
   <div id="view-user-account">
     <Breadcrumb :items="[{name: $t('general.account')}]" />
 
-    <!-- User Profile -->
+    <!-- User profile -->
     <Box>
       <template #header>{{$t('user.profile')}}</template>
       <div class="profile-columns">
         <div>
-          <div class="row">{{$t('user.email')}}:</div>
-          <div class="row">{{$t('user.name')}}:</div>
+          <div class="row-condensed">{{$t('user.email')}}:</div>
+          <div class="row-condensed">{{$t('user.name')}}:</div>
         </div>
         <div>
-          <div class="row">{{email}}</div>
-          <div class="row">{{name}}</div>
+          <div class="row-condensed">{{email}}</div>
+          <div class="row-condensed">{{name}}</div>
         </div>
       </div>
     </Box>
 
-    <!-- Change Password -->
+    <!-- Change password -->
     <Box>
       <template #header>{{$t('user.changePassword')}}</template>
-      <el-form
-        :model="changePasswordForm"
-        :rules="validationRules"
-        ref="changePasswordForm"
-        label-position="left"
-        label-width="150px"
-        size="mini"
-      >
-        <el-form-item prop="oldPassword" :label="$t('user.oldPassword')">
-          <el-input
-            show-password
-            :placeholder="$t('user.oldPassword')"
-            v-model="changePasswordForm.oldPassword"
-          ></el-input>
-        </el-form-item>
-        <el-form-item prop="newPassword" :label="$t('user.newPassword')">
-          <el-input
-            show-password
-            :placeholder="$t('user.newPassword')"
-            v-model="changePasswordForm.newPassword"
-          ></el-input>
-        </el-form-item>
-        <el-form-item prop="newPasswordRepeat" :label="$t('user.repeat')">
-          <el-input
-            show-password
-            :placeholder="$t('user.newPassword')"
-            v-model="changePasswordForm.newPasswordRepeat"
-          ></el-input>
-        </el-form-item>
-      </el-form>
+
+      <!-- Feedback -->
+      <el-collapse-transition>
+        <Alert
+          type="success"
+          v-if="success !== null"
+          v-on:close="success = null"
+          closeable
+          show-icon
+        >{{$t(success)}}</Alert>
+        <Alert
+          type="error"
+          v-if="error !== null"
+          v-on:close="error = null"
+          closeable
+          show-icon
+        >{{$t(error)}}</Alert>
+      </el-collapse-transition>
+
+      <!-- Change password form -->
       <div class="row">
-        <el-button
-          type="primary"
-          @click="changePassword"
-          icon="el-icon-check"
+        <el-form
+          :model="changePasswordForm"
+          :rules="validationRules"
+          ref="changePasswordForm"
+          label-position="left"
+          label-width="150px"
           size="mini"
-          class="right"
-        >{{$t('general.save')}}</el-button>
+        >
+          <el-form-item prop="oldPassword" :label="$t('user.oldPassword')">
+            <el-input
+              show-password
+              :placeholder="$t('user.oldPassword')"
+              v-model="changePasswordForm.oldPassword"
+            ></el-input>
+          </el-form-item>
+          <el-form-item prop="newPassword" :label="$t('user.newPassword')">
+            <el-input
+              show-password
+              :placeholder="$t('user.newPassword')"
+              v-model="changePasswordForm.newPassword"
+            ></el-input>
+          </el-form-item>
+          <el-form-item prop="newPasswordRepeat" :label="$t('user.repeat')">
+            <el-input
+              show-password
+              :placeholder="$t('user.newPassword')"
+              v-model="changePasswordForm.newPasswordRepeat"
+            ></el-input>
+          </el-form-item>
+        </el-form>
+        <div class="row">
+          <el-button
+            type="primary"
+            @click="changePassword"
+            icon="el-icon-check"
+            size="mini"
+            class="right"
+          >{{$t('general.save')}}</el-button>
+        </div>
       </div>
     </Box>
   </div>
@@ -67,11 +89,12 @@
 import ApiErrorHandlingMixin from '@/mixins/ApiErrorHandlingMixin.js';
 import Breadcrumb from '@/components/Breadcrumb.vue';
 import Box from '@/components/Box.vue';
+import Alert from '@/components/Alert.vue';
 
 export default {
   name: 'user-account',
   mixins: [ApiErrorHandlingMixin],
-  components: { Breadcrumb, Box },
+  components: { Breadcrumb, Box, Alert },
   data() {
     return {
       email: this.$store.state.email,
@@ -81,6 +104,8 @@ export default {
         newPassword: '',
         newPasswordRepeat: '',
       },
+      error: null,
+      success: null,
     };
   },
   computed: {
@@ -105,18 +130,18 @@ export default {
     },
     changePassword: function() {
       this.error = null;
-      this.passwordChanged = false;
+      this.success = null;
       this.$refs['changePasswordForm'].validate(valid => {
         if (valid) {
           this.$api
             .changePassword(this.changePasswordForm.oldPassword, this.changePasswordForm.newPassword)
             .then(response => {
-              this.passwordChanged = true;
+              this.success = 'user.passwordChanged';
               this.$refs['changePasswordForm'].resetFields();
             })
             .catch(error => {
               if (error.status === 400) {
-                this.error = 'account.badPassword';
+                this.error = 'user.badPassword';
               } else {
                 this.handleApiError(error);
               }
