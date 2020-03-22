@@ -24,5 +24,10 @@
         /// The salt used to hash this user's password.
         /// </summary>
         public byte[] Salt { get; set; }
+
+        /// <summary>
+        /// Whether the user is an admin.
+        /// </summary>
+        public bool IsAdmin { get; set; }
     }
 }

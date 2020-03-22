@@ -95,9 +95,10 @@ namespace Firefly.Services
             // Set user claims
             List<Claim> claims = new List<Claim>
             {
-                // Add subject
+                // Add subject, name, role
                 new Claim(JwtRegisteredClaimNames.Sub, user.Email),
-                new Claim("name", user.Name)
+                new Claim("name", user.Name),
+                new Claim("admin", user.IsAdmin.ToString().ToLowerInvariant())
             };
 
             // Generate token

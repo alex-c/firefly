@@ -28,8 +28,9 @@ namespace Firefly.Repositories
         /// <param name="name">The display name of the user to create.</param>
         /// <param name="password">The password of the user to create.</param>
         /// <param name="salt">The salt used to had the user's password.</param>
+        /// <param name="isAdmin">Whether the user is an admin.</param>
         /// <returns>Returns the newly created user.</returns>
-        User CreateUser(string email, string name, string password, byte[] salt);
+        User CreateUser(string email, string name, string password, byte[] salt, bool isAdmin);
 
         /// <summary>
         /// Updates a user.

@@ -25,12 +25,12 @@ namespace Firefly.Repositories.Mocked
 
         private void GenerateUsers()
         {
-            GenerateUser("alex", "Alexandre Charoy");
+            GenerateUser("alex", "Alexandre Charoy", true);
             GenerateUser("anna", "Anna Annamann");
             GenerateUser("jinx", "Jinx LoL");
         }
 
-        private void GenerateUser(string email, string name)
+        private void GenerateUser(string email, string name, bool isAdmin = false)
         {
             (string hash, byte[] salt) = PasswordHashingService.HashAndSaltPassword("test");
             User user = new User()
@@ -39,6 +39,7 @@ namespace Firefly.Repositories.Mocked
                 Password = hash,
                 Salt = salt,
                 Name = name,
+                IsAdmin = isAdmin
             };
             Users.Add(user.Email, user);
         }

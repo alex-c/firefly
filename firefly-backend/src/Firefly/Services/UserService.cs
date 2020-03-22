@@ -66,9 +66,10 @@ namespace Firefly.Services
         /// <param name="email">An email for the user to create.</param>
         /// <param name="name">A name for the user to create.</param>
         /// <param name="password">A password for the user.</param>
+        /// <param name="isAdmin">Whether the user is an admin. Defaults to false.</param>
         /// <returns>Returns the newly created user.</returns>
         /// <exception cref="EntityAlreadyExsistsException">Thrown if the email is already taken.</exception>
-        public User CreateUser(string email, string name, string password)
+        public User CreateUser(string email, string name, string password, bool isAdmin = false)
         {
             if (UserRepository.GetUser(email) != null)
             {
@@ -77,7 +78,7 @@ namespace Firefly.Services
 
             // Hash & salt password, create user!
             (string hash, byte[] salt) = PasswordHashingService.HashAndSaltPassword(password);
-            return UserRepository.CreateUser(email, name, hash, salt);
+            return UserRepository.CreateUser(email, name, hash, salt, isAdmin);
         }
 
         /// <summary>

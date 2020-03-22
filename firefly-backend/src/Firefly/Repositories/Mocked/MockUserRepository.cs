@@ -31,7 +31,7 @@ namespace Firefly.Repositories.Mocked
             return Users.GetValueOrDefault(email);
         }
 
-        public User CreateUser(string email, string name, string password, byte[] salt)
+        public User CreateUser(string email, string name, string password, byte[] salt, bool isAdmin)
         {
             User user = new User()
             {
@@ -39,6 +39,7 @@ namespace Firefly.Repositories.Mocked
                 Name = name,
                 Password = password,
                 Salt = salt,
+                IsAdmin = isAdmin,
             };
             Users.Add(email, user);
             return user;
