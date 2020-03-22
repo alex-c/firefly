@@ -48,7 +48,13 @@ export default {
     margin-top: 8px;
     overflow: auto;
     &:first-child {
-      margin-top: 0;
+      margin-top: 0px;
+    }
+  }
+  .row-doublepad {
+    margin-top: 16px;
+    &:first-child {
+      margin-top: 0px;
     }
   }
 }

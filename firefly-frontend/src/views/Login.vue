@@ -6,16 +6,41 @@
     <div id="login-content">
       <Box>
         <template v-slot:header>{{ $t('login.welcome') }}</template>
-        <div>
+        <el-collapse-transition>
+          <Alert
+            type="error"
+            closeable
+            show-icon
+            v-if="badLogin"
+            v-on:close="badLogin = false"
+          >{{$t('login.badLogin')}}</Alert>
+        </el-collapse-transition>
+        <div class="row-doublepad">
           <el-form :model="loginForm" :rules="validationRules" ref="loginForm">
             <el-form-item prop="email">
-              <el-input v-model="loginForm.email" :placeholder="$t('user.email')" prefix-icon="el-icon-user-solid" @keyup.enter.native="login" autofocus></el-input>
+              <el-input
+                v-model="loginForm.email"
+                :placeholder="$t('user.email')"
+                prefix-icon="el-icon-user-solid"
+                @keyup.enter.native="login"
+                autofocus
+              ></el-input>
             </el-form-item>
             <el-form-item prop="password">
-              <el-input v-model="loginForm.password" :placeholder="$t('user.password')" prefix-icon="el-icon-lock" @keyup.enter.native="login" show-password></el-input>
+              <el-input
+                v-model="loginForm.password"
+                :placeholder="$t('user.password')"
+                prefix-icon="el-icon-lock"
+                @keyup.enter.native="login"
+                show-password
+              ></el-input>
             </el-form-item>
             <div id="login-button-container">
-              <el-button type="primary" icon="el-icon-* mdi mdi-login" @click="login">{{ $t('login.login') }}</el-button>
+              <el-button
+                type="primary"
+                icon="el-icon-* mdi mdi-login"
+                @click="login"
+              >{{ $t('login.login') }}</el-button>
             </div>
           </el-form>
         </div>
@@ -36,17 +61,19 @@ import ApiErrorHandlingMixin from '@/mixins/ApiErrorHandlingMixin.js';
 import Header from '@/components/Header.vue';
 import Settings from '@/views/Settings.vue';
 import Box from '@/components/Box.vue';
+import Alert from '@/components/Alert.vue';
 
 export default {
   name: 'login',
   mixins: [ApiErrorHandlingMixin],
-  components: { Header, Settings, Box },
+  components: { Header, Settings, Box, Alert },
   data() {
     return {
       loginForm: {
         email: '',
         password: '',
       },
+      badLogin: false,
     };
   },
   computed: {

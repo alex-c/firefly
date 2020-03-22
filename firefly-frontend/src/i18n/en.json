@@ -21,7 +21,8 @@
     "validation": {
       "email": "Please enter an email.",
       "password": "Please enter a password."
-    }
+    },
+    "badLogin": "Bad login credentials!"
   },
   "user": {
     "email": "Email",
