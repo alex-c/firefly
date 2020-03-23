@@ -7,9 +7,13 @@
     "account": "Account",
     "logout": "Log out",
     "dashboard": "Dashboard",
+    "finances": "Finances",
     "accounts": "Accounts",
     "transactions": "Transactions",
     "trends": "Trends",
+    "admin": "Administration",
+    "user-admin": "Users",
+    "account-admin": "Accounts",
     "language": "Language",
     "theme": "Theme",
     "save": "Save"

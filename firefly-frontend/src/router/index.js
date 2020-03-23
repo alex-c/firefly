@@ -2,18 +2,33 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
-// Views
+// Views - general
 import Login from '@/views/Login.vue';
 import Private from '@/views/Private.vue';
 import UserAccount from '@/views/pages/UserAccount.vue';
+import NotFound from '@/views/pages/NotFound.vue';
+
+// Views - pages
 import Dashboard from '@/views/pages/Dashboard.vue';
 import Accounts from '@/views/pages/Accounts.vue';
 import Transactions from '@/views/pages/Transactions.vue';
 import Trends from '@/views/pages/Trends.vue';
-import NotFound from '@/views/pages/NotFound.vue';
+
+// Views - admin pages
+import UserAdmin from '@/views/admin-pages/UserAdmin.vue';
+import AccountAdmin from '@/views/admin-pages/AccountAdmin.vue';
 
 // Store
 import store from '../store/store.js';
+
+// Admin navigation guard
+function userIsAdmin(_to, _from, next) {
+  if (store.state.admin) {
+    next();
+  } else {
+    next(_from);
+  }
+}
 
 // Define routes
 const routes = [
@@ -62,6 +77,16 @@ const routes = [
       {
         path: '/trends',
         component: Trends,
+      },
+      {
+        path: '/user-admin',
+        component: UserAdmin,
+        beforeEnter: userIsAdmin,
+      },
+      {
+        path: '/account-admin',
+        component: AccountAdmin,
+        beforeEnter: userIsAdmin,
       },
       {
         path: '*',

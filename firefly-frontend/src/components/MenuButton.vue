@@ -1,5 +1,4 @@
 <template>
-  <!--router-link :to="{path: route}"-->
   <div class="menu-button" :class="{active: currentRoute == route}" @click="navigate">
     <div>
       <span class="menu-button-icon mdi" :class="this.icon" />
