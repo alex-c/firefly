@@ -45,6 +45,16 @@ const Api = {
           .catch(catchNetworkError)
           .then(processResponse);
       },
+      users: {
+        getUsers: (page, elementsPerPage, search) => {
+          return fetch(`http://localhost:5000/api/users?page=${page}&elementsPerPage=${elementsPerPage}&search=${search}`, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+          })
+            .catch(catchNetworkError)
+            .then(processResponse);
+        },
+      },
     };
   },
 };

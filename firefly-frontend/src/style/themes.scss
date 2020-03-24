@@ -49,4 +49,38 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
   color: var($--theme-text);
 }
 
+.el-table {
+  border-color: var($--theme-foreground);
+  color: var($--theme-text);
+  thead {
+    color: var($--theme-text);
+    tr {
+      th {
+        background-color: var($--theme-background);
+        &.is-leaf {
+          border-bottom: 1px solid var($--theme-primary);
+        }
+      }
+    }
+  }
+  .el-table__row {
+    background-color: var($--theme-background);
+    td {
+      border-color: var($--theme-foreground);
+    }
+    &.current-row > td {
+      background-color: var($--theme-primary);
+      color: var($--theme-primary-contrast);
+    }
+  }
+}
+
+.el-table--enable-row-hover .el-table__body tr:hover > td {
+  background-color: $primary-light;
+}
+
+.el-table--group::after, .el-table--border::after, .el-table::before {
+  content: none;
+}
+
 // Import this once in main.js to apply theme root styles and Element UI theming!

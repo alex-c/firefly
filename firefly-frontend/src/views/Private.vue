@@ -35,9 +35,7 @@
     </Header>
     <Menu :collapsed="uiCollapsed" />
     <main id="content" :class="{expanded: uiCollapsed}">
-      <div id="content-inner">
-        <router-view></router-view>
-      </div>
+      <router-view></router-view>
     </main>
     <Settings />
   </div>
@@ -144,10 +142,5 @@ export default {
     margin-left: 52px;
   }
   transition: all 0.5s ease-in-out;
-}
-
-#content-inner {
-  max-width: 1000px;
-  margin: auto;
 }
 </style>

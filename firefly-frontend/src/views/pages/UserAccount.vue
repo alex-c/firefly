@@ -155,6 +155,8 @@ export default {
 
 <style lang="scss" scoped>
 #view-user-account {
+  max-width: 800px;
+  margin: auto;
   padding: 0px 16px;
   & > div {
     margin-top: 16px;
