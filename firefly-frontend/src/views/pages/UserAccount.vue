@@ -7,11 +7,11 @@
       <template #header>{{$t('user.profile')}}</template>
       <div class="profile-columns">
         <div>
-          <div class="row-condensed">{{$t('user.email')}}:</div>
+          <div class="row-condensed">{{$t('user.id')}}:</div>
           <div class="row-condensed">{{$t('user.name')}}:</div>
         </div>
         <div>
-          <div class="row-condensed">{{email}}</div>
+          <div class="row-condensed">{{id}}</div>
           <div class="row-condensed">{{name}}</div>
         </div>
       </div>
@@ -97,7 +97,7 @@ export default {
   components: { Breadcrumb, Box, Alert },
   data() {
     return {
-      email: this.$store.state.email,
+      id: this.$store.state.id,
       name: this.$store.state.name,
       changePasswordForm: {
         oldPassword: '',

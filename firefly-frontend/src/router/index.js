@@ -23,7 +23,7 @@ import store from '../store/store.js';
 
 // Admin navigation guard
 function userIsAdmin(_to, _from, next) {
-  if (store.state.admin) {
+  if (store.state.role === 'Administrator') {
     next();
   } else {
     next(_from);

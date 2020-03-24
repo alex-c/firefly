@@ -10,42 +10,42 @@ import ui from './modules/store.ui.js';
 
 // Load user data from local storage
 const token = localStorage.getItem('token');
-const email = localStorage.getItem('email');
+const id = localStorage.getItem('id');
 const name = localStorage.getItem('name');
-const admin = localStorage.getItem('admin') === 'true';
+const role = localStorage.getItem('role');
 
 // Set up store
 export default new Vuex.Store({
   state: {
     token: token,
-    email: email,
+    id: id,
     name: name,
-    admin: admin,
+    role: role,
   },
   mutations: {
     login(state, token) {
       const decodedToken = jwtDecode(token);
-      const email = decodedToken.sub;
+      const id = decodedToken.sub;
       const name = decodedToken.name;
-      const admin = decodedToken.admin === 'true';
+      const role = decodedToken.role ? decodedToken.role : 'None';
       state.token = token;
-      state.email = email;
+      state.id = id;
       state.name = name;
-      state.admin = admin;
+      state.role = role;
       localStorage.setItem('token', token);
-      localStorage.setItem('email', email);
+      localStorage.setItem('id', id);
       localStorage.setItem('name', name);
-      localStorage.setItem('admin', admin);
+      localStorage.setItem('role', role);
     },
     logout(state) {
       state.token = null;
-      state.email = null;
+      state.id = null;
       state.name = null;
-      state.admin = null;
+      state.role = null;
       localStorage.removeItem('token');
-      localStorage.removeItem('email');
+      localStorage.removeItem('id');
       localStorage.removeItem('name');
-      localStorage.removeItem('admin');
+      localStorage.removeItem('role');
     },
   },
   actions: {},

@@ -23,13 +23,13 @@
     "login": "Login",
     "footer": "Check out Firefly on Github!",
     "validation": {
-      "email": "Please enter an email.",
+      "id": "Please enter an ID.",
       "password": "Please enter a password."
     },
     "badLogin": "Bad login credentials!"
   },
   "user": {
-    "email": "Email",
+    "id": "Id",
     "name": "Name",
     "password": "Password",
     "profile": "Profile",

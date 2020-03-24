@@ -25,11 +25,11 @@ function getAuthorizationHeader() {
 const Api = {
   install(Vue) {
     Vue.prototype.$api = {
-      login: (email, password) => {
+      login: (id, password) => {
         return fetch('http://localhost:5000/api/auth', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password }),
+          body: JSON.stringify({ id, password }),
         })
           .catch(catchNetworkError)
           .then(processResponse);

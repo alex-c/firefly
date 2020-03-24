@@ -23,10 +23,10 @@
         <!-- Login form -->
         <div class="row">
           <el-form :model="loginForm" :rules="validationRules" ref="loginForm">
-            <el-form-item prop="email">
+            <el-form-item prop="id">
               <el-input
-                v-model="loginForm.email"
-                :placeholder="$t('user.email')"
+                v-model="loginForm.id"
+                :placeholder="$t('user.id')"
                 prefix-icon="el-icon-user-solid"
                 @keyup.enter.native="login"
                 autofocus
@@ -78,7 +78,7 @@ export default {
   data() {
     return {
       loginForm: {
-        email: '',
+        id: '',
         password: '',
       },
       badLogin: false,
@@ -90,7 +90,7 @@ export default {
     },
     validationRules() {
       return {
-        email: { required: true, message: this.$t('login.validation.email'), trigger: 'blur' },
+        id: { required: true, message: this.$t('login.validation.id'), trigger: 'blur' },
         password: { required: true, message: this.$t('login.validation.password'), trigger: 'blur' },
       };
     },
@@ -101,7 +101,7 @@ export default {
       this.$refs['loginForm'].validate(valid => {
         if (valid) {
           this.$api
-            .login(this.loginForm.email, this.loginForm.password)
+            .login(this.loginForm.id, this.loginForm.password)
             .then(response => {
               const token = response.body.token;
               this.$store.commit('login', token);
@@ -109,7 +109,7 @@ export default {
             })
             .catch(error => {
               if (error.status === 401) {
-                this.badLogin = true; //TODO
+                this.badLogin = true;
               } else {
                 this.handleApiError(error);
               }

@@ -31,7 +31,7 @@ export default {
   props: ['collapsed'],
   data() {
     return {
-      userIsAdmin: this.$store.state.admin,
+      userIsAdmin: this.$store.state.role === 'Administrator',
     };
   },
   computed: {
