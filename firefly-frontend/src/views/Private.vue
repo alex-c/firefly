@@ -65,6 +65,13 @@ export default {
     toggleUiState: function() {
       this.$store.commit('toggleUiState');
     },
+    fitToScreen: function() {
+      if (window.innerWidth <= 800) {
+        this.$store.commit('collapseUi');
+      } else {
+        this.$store.commit('expandUi');
+      }
+    },
     toggleSettings: function() {
       this.$store.commit('toggleSettings');
     },
@@ -82,6 +89,13 @@ export default {
           break;
       }
     },
+  },
+  created: function() {
+    window.addEventListener('resize', this.fitToScreen);
+    this.fitToScreen();
+  },
+  destroyed() {
+    window.removeEventListener('resize', this.fitToScreen);
   },
 };
 </script>
