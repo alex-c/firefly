@@ -129,7 +129,7 @@ export default {
 #header-title {
   float: left;
   font-family: 'Lobster', cursive;
-  padding: 16px;
+  padding: 8px 16px;
   font-size: 32px;
   width: 168px;
   text-align: center;

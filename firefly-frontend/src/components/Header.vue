@@ -29,7 +29,7 @@ export default {
   background-color: var($--theme-primary);
   color: var($--theme-primary-contrast);
   text-align: left;
-  height: 72px;
+  height: 56px;
 }
 
 #header-buttons {
@@ -37,10 +37,11 @@ export default {
 }
 
 .header-button {
-  width: 40px;
-  height: 40px;
-  padding: 16px;
-  font-size: 36px;
+  width: 32px;
+  height: 32px;
+  padding: 12px;
+  font-size: 28px;
+  text-align: center;
   &:hover {
     background-color: $primary-dark;
     color: $light;

@@ -85,7 +85,7 @@ export default {
 
 #settings-overlay {
   position: fixed;
-  top: 72px;
+  top: 56px;
   left: 0px;
   right: 0px;
   bottom: 0px;
@@ -95,7 +95,7 @@ export default {
 
 #settings {
   position: fixed;
-  top: 72px;
+  top: 56px;
   right: 0px;
   bottom: 0px;
   width: 0px;

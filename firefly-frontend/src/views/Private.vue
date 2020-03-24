@@ -92,7 +92,7 @@ export default {
 #header-title {
   float: left;
   font-family: 'Lobster', cursive;
-  padding: 16px;
+  padding: 8px 16px;
   font-size: 32px;
   width: 168px;
   text-align: center;
@@ -113,10 +113,10 @@ export default {
 
 #user-menu {
   color: var($--theme-primary-contrast);
-  width: 40px;
-  height: 40px;
-  padding: 16px;
-  font-size: 36px;
+  width: 32px;
+  height: 32px;
+  padding: 12px;
+  font-size: 28px;
   &:hover {
     background-color: $primary-dark;
     color: $light;
