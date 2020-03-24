@@ -6,9 +6,9 @@
     public class LoginRequest
     {
         /// <summary>
-        /// Email of the user to login.
+        /// ID of the user to login.
         /// </summary>
-        public string Email { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// Password of the user.

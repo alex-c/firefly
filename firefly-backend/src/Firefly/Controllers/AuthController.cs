@@ -24,9 +24,9 @@ namespace Firefly.Controllers
         /// </summary>
         /// <param name="loggerFactory">Factory to create loggers from.</param>
         /// <param name="authService">Injected authentication service.</param>
-        public AuthController(ILoggerFactory loggerFactory, AuthService authService)
+        public AuthController(ILogger<AuthController> logger, AuthService authService)
         {
-            Logger = loggerFactory.CreateLogger<AuthController>();
+            Logger = logger;
             AuthService = authService;
         }
 
@@ -38,14 +38,14 @@ namespace Firefly.Controllers
         [HttpPost]
         public IActionResult AuthenticateUser([FromBody] LoginRequest loginRequest)
         {
-            if (loginRequest == null || loginRequest.Email == null || loginRequest.Password == null)
+            if (loginRequest == null || loginRequest.Id == null || loginRequest.Password == null)
             {
-                return HandleBadRequest("A user email and password should be supplied for login requests.");
+                return HandleBadRequest("A user ID and password need to be supplied for login requests.");
             }
 
             try
             {
-                if (AuthService.TryAuthenticate(loginRequest.Email, loginRequest.Password, out string token))
+                if (AuthService.TryAuthenticate(loginRequest.Id, loginRequest.Password, out string token))
                 {
                     return Ok(new AuthResponse(token));
                 }

@@ -30,18 +30,18 @@ namespace Firefly.Repositories.Mocked
             GenerateUser("jinx", "Jinx LoL");
         }
 
-        private void GenerateUser(string email, string name, bool isAdmin = false)
+        private void GenerateUser(string id, string name, bool isAdmin = false)
         {
             (string hash, byte[] salt) = PasswordHashingService.HashAndSaltPassword("test");
             User user = new User()
             {
-                Email = email,
+                Id = id,
                 Password = hash,
                 Salt = salt,
                 Name = name,
                 IsAdmin = isAdmin
             };
-            Users.Add(user.Email, user);
+            Users.Add(user.Id, user);
         }
 
         #endregion

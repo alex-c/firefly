@@ -24,9 +24,9 @@ namespace Firefly.Controllers
         /// </summary>
         /// <param name="loggerFactory">Factory to create loggers from.</param>
         /// <param name="userService">Service providing user-related functionality.</param>
-        public SelfController(ILoggerFactory loggerFactory, UserService userService)
+        public SelfController(ILogger<SelfController> logger, UserService userService)
         {
-            Logger = loggerFactory.CreateLogger<SelfController>();
+            Logger = logger;
             UserService = userService;
         }
 

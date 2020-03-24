@@ -1,6 +1,7 @@
 ﻿using Firefly.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Firefly.Repositories.Mocked
@@ -26,28 +27,33 @@ namespace Firefly.Repositories.Mocked
             return Users.Values;
         }
 
-        public User GetUser(string email)
+        public IEnumerable<User> SearchUsersByName(string partialName)
         {
-            return Users.GetValueOrDefault(email);
+            return Users.Values.Where(u => u.Name.ToLowerInvariant().Contains(partialName.ToLowerInvariant()));
         }
 
-        public User CreateUser(string email, string name, string password, byte[] salt, bool isAdmin)
+        public User GetUser(string id)
+        {
+            return Users.GetValueOrDefault(id);
+        }
+
+        public User CreateUser(string id, string name, string password, byte[] salt, bool isAdmin)
         {
             User user = new User()
             {
-                Email = email,
+                Id = id,
                 Name = name,
                 Password = password,
                 Salt = salt,
                 IsAdmin = isAdmin,
             };
-            Users.Add(email, user);
+            Users.Add(id, user);
             return user;
         }
 
         public void UpdateUser(User user)
         {
-            Users[user.Email] = user;
+            Users[user.Id] = user;
         }
 
         public void DeleteUser(string email)

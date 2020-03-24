@@ -18,6 +18,11 @@ namespace Firefly.Services
     public class AuthService
     {
         /// <summary>
+        /// Magic string for the administrator role in JWTs.
+        /// </summary>
+        public const string ROLE_ADMINISTRATOR = "Administrator";
+
+        /// <summary>
         /// Provides password hashing functionalities.
         /// </summary>
         private PasswordHashingService PasswordHashingService { get; }
@@ -70,20 +75,20 @@ namespace Firefly.Services
         /// <summary>
         /// Attempts to authenticate a user.
         /// </summary>
-        /// <param name="email">The user's email.</param>
+        /// <param name="id">The user's unique ID.</param>
         /// <param name="password">The user's password.</param>
         /// <param name="serializedToken">The serialized token.</param>
         /// <returns>Returns whether authentication was successful.</returns>
         /// <exception cref="Firefly.Services.Exceptions.EntityNotFoundException">User</exception>
-        public bool TryAuthenticate(string email, string password, out string serializedToken)
+        public bool TryAuthenticate(string id, string password, out string serializedToken)
         {
             serializedToken = null;
 
             // Get user
-            User user = UserRepository.GetUser(email);
+            User user = UserRepository.GetUser(id);
             if (user == null)
             {
-                throw new EntityNotFoundException("User", email);
+                throw new EntityNotFoundException("User", id);
             }
 
             // Check password
@@ -96,10 +101,13 @@ namespace Firefly.Services
             List<Claim> claims = new List<Claim>
             {
                 // Add subject, name, role
-                new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+                new Claim(JwtRegisteredClaimNames.Sub, user.Id),
                 new Claim("name", user.Name),
-                new Claim("admin", user.IsAdmin.ToString().ToLowerInvariant())
             };
+            if (user.IsAdmin)
+            {
+                claims.Add(new Claim("role", ROLE_ADMINISTRATOR));
+            }
 
             // Generate token
             JwtSecurityToken token = new JwtSecurityToken(JwtIssuer, null, claims, expires: DateTime.Now.Add(JwtLifetime), signingCredentials: SigningCredentials);

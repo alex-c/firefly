@@ -15,22 +15,29 @@ namespace Firefly.Repositories
         IEnumerable<User> GetAllUsers();
 
         /// <summary>
-        /// Gets a user by his Email, which is his unique user ID.
+        /// Searches users by name using a partial name.
         /// </summary>
-        /// <param name="email">The Email (ID) of the user.</param>
+        /// <param name="partialName">Partial name to search for.</param>
+        /// <returns>Returns a list of matching users.</returns>
+        IEnumerable<User> SearchUsersByName(string partialName);
+
+        /// <summary>
+        /// Gets a user by his unique user ID.
+        /// </summary>
+        /// <param name="id">The ID of the user.</param>
         /// <returns>Returns the user, or null if no matching user was found.</returns>
-        User GetUser(string email);
+        User GetUser(string id);
 
         /// <summary>
         /// Creates a new user.
         /// </summary>
-        /// <param name="email">The Email (ID) of the user to create.</param>
+        /// <param name="id">The ID of the user to create.</param>
         /// <param name="name">The display name of the user to create.</param>
         /// <param name="password">The password of the user to create.</param>
         /// <param name="salt">The salt used to had the user's password.</param>
         /// <param name="isAdmin">Whether the user is an admin.</param>
         /// <returns>Returns the newly created user.</returns>
-        User CreateUser(string email, string name, string password, byte[] salt, bool isAdmin);
+        User CreateUser(string id, string name, string password, byte[] salt, bool isAdmin);
 
         /// <summary>
         /// Updates a user.
@@ -41,7 +48,7 @@ namespace Firefly.Repositories
         /// <summary>
         /// Deletes a user, identified by his unique ID.
         /// </summary>
-        /// <param name="email">The Email (ID) of the user to delete.</param>
-        void DeleteUser(string email);
+        /// <param name="id">The ID of the user to delete.</param>
+        void DeleteUser(string id);
     }
 }
