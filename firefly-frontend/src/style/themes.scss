@@ -5,7 +5,7 @@
 $theme-map-light: (
     $--theme-primary: $primary,
     $--theme-primary-contrast: $light,
-    $--theme-background: #EFEFDF,
+    $--theme-background: #DFDFDF,
     $--theme-foreground: $light,
     $--theme-text: $dark,
 );
@@ -77,10 +77,23 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
 
 .el-table--enable-row-hover .el-table__body tr:hover > td {
   background-color: $primary-light;
+  cursor: pointer;
 }
 
 .el-table--group::after, .el-table--border::after, .el-table::before {
   content: none;
+}
+
+.el-pagination.is-background .btn-prev,
+.el-pagination.is-background .btn-next,
+.el-pagination.is-background .el-pager li {
+  background-color: var($--theme-background);
+  color: var($--theme-text);
+}
+
+.el-pagination.is-background .el-pager li:not(.disabled):hover {
+  background-color: $primary-light;
+  color: var($--theme-text);
 }
 
 // Import this once in main.js to apply theme root styles and Element UI theming!
