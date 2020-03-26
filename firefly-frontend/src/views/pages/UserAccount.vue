@@ -1,6 +1,6 @@
 <template>
   <div id="view-user-account">
-    <Breadcrumb :items="[{name: $t('general.account')}]" />
+    <Breadcrumb :name="$t('general.account')" />
 
     <!-- User profile -->
     <Box :title="$t('user.profile')">

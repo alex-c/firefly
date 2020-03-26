@@ -6,13 +6,23 @@
       <router-link v-if="item.path !== undefined" :to="item.path">{{item.name}}</router-link>
       <span v-else>{{item.name}}</span>
     </span>
+    <span v-if="name !== undefined">
+      <span class="breadcrumb-separator">/</span>
+      <span class="breadcrumb-current-location">{{name}}</span>
+    </span>
+    <div class="breadcrumb-back right" v-if="backTo !== undefined">
+      <router-link :to="{path: backTo}">
+        <span class="mdi mdi-chevron-left" />
+        {{$t('general.back')}}
+      </router-link>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: 'breadcrumb',
-  props: ['items'],
+  props: ['name', 'items', 'backTo'],
 };
 </script>
 
@@ -23,14 +33,18 @@ export default {
   text-align: left;
   font-size: 12px;
   a:any-link {
-    color: $secondary-lighter;
+    color: var($--theme-text);
   }
   a:hover {
     text-decoration: underline;
   }
   a:active {
-    color: var($--theme-text);
+    color: $primary;
   }
+}
+
+.breadcrumb-current-location {
+  color: $primary-light;
 }
 
 .breadcrumb-separator {

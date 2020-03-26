@@ -16,6 +16,7 @@ import Trends from '@/views/pages/Trends.vue';
 
 // Views - admin pages
 import UserAdmin from '@/views/admin-pages/UserAdmin.vue';
+import UserCreation from '@/views/admin-pages/UserCreation.vue';
 import AccountAdmin from '@/views/admin-pages/AccountAdmin.vue';
 
 // Store
@@ -81,6 +82,11 @@ const routes = [
       {
         path: '/user-admin',
         component: UserAdmin,
+        beforeEnter: userIsAdmin,
+      },
+      {
+        path: '/user-admin/create',
+        component: UserCreation,
         beforeEnter: userIsAdmin,
       },
       {

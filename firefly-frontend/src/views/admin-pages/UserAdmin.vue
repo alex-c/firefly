@@ -1,16 +1,18 @@
 <template>
   <div id="view-user-admin">
-    <Breadcrumb :items="[{name: 'Administration'}, {name: 'Users'}]" />
+    <Breadcrumb :name="$t('general.user-admin')" :items="[{name: $t('general.admin')}]" />
     <Box :title="$t('users.title')">
       <!-- Header -->
       <template #header-buttons>
         <div class="right">
-          <el-button
-            type="primary"
-            theme="dark"
-            size="mini"
-            icon="el-icon-plus  "
-          >{{$t('users.create')}}</el-button>
+          <router-link :to="{path: '/user-admin/create'}">
+            <el-button
+              type="primary"
+              theme="dark"
+              size="mini"
+              icon="el-icon-plus"
+            >{{$t('users.create')}}</el-button>
+          </router-link>
         </div>
       </template>
 
@@ -56,13 +58,14 @@
           ></el-pagination>
         </div>
         <div class="right">
-          <el-button
-            icon="el-icon-edit"
-            type="primary"
-            size="mini"
-            :disabled="selected.id === null"
-            @click="edit"
-          >{{$t('general.edit')}}</el-button>
+          <router-link :to="{path: '/'}">
+            <el-button
+              icon="el-icon-edit"
+              type="primary"
+              size="mini"
+              :disabled="selected.id === null"
+            >{{$t('general.edit')}}</el-button>
+          </router-link>
         </div>
       </div>
     </Box>
