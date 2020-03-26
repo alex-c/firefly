@@ -1,9 +1,18 @@
 <template>
   <div class="box">
     <div class="box-header" v-if="hasHeader">
-      <slot name="header" />
+      <div class="box-title left">{{title}}</div>
+      <div class="right">
+        <div class="box-toggle right" v-if="toggleable !== undefined" @click="toggled = !toggled">
+          <span class="mdi mdi-chevron-down-circle" v-if="toggled" />
+          <span class="mdi mdi-chevron-up-circle" v-else />
+        </div>
+        <div class="header-buttons right">
+          <slot name="header-buttons" />
+        </div>
+      </div>
     </div>
-    <div class="box-content">
+    <div class="box-content" v-show="!toggled">
       <slot />
     </div>
   </div>
@@ -12,15 +21,21 @@
 <script>
 export default {
   name: 'box',
+  props: ['title', 'toggleable'],
+  data() {
+    return {
+      toggled: false,
+    };
+  },
   computed: {
     hasHeader() {
-      return this.$slots.header !== undefined;
+      return this.title !== undefined || this.$slots['header-buttons'] !== undefined;
     },
   },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '@/style/colors.scss';
 
 .box {
@@ -30,19 +45,35 @@ export default {
 }
 
 .box-header {
-  padding: 16px;
-  font-weight: bold;
+  padding: 0px 16px;
+  height: 48px;
+  border-bottom: 1px solid var($--theme-primary);
+  .box-title {
+    padding: 16px 0px;
+    font-weight: bold;
+  }
   .mdi {
-    margin-right: 6px;
+    margin-left: 16px;
     font-size: 18px;
-    float: left;
     position: relative;
     top: -2px;
+  }
+  .header-buttons {
+    padding: 10px 0px;
+    button {
+      margin-left: 16px;
+    }
+  }
+  .box-toggle {
+    height: 16px;
+    padding: 16px 0px;
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 
 .box-content {
-  border-top: 1px solid var($--theme-primary);
   padding: 16px;
   .row {
     margin-top: 16px;

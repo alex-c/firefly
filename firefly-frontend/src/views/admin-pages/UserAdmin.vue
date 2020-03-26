@@ -1,8 +1,18 @@
 <template>
   <div id="view-user-admin">
     <Breadcrumb :items="[{name: 'Administration'}, {name: 'Users'}]" />
-    <Box>
-      <template #header>Users</template>
+    <Box :title="$t('users.title')">
+      <!-- Header -->
+      <template #header-buttons>
+        <div class="right">
+          <el-button
+            type="primary"
+            theme="dark"
+            size="mini"
+            icon="el-icon-plus  "
+          >{{$t('users.create')}}</el-button>
+        </div>
+      </template>
 
       <!-- Filters -->
       <div class="row" id="search-bar">

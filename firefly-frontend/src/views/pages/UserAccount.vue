@@ -3,8 +3,7 @@
     <Breadcrumb :items="[{name: $t('general.account')}]" />
 
     <!-- User profile -->
-    <Box>
-      <template #header>{{$t('user.profile')}}</template>
+    <Box :title="$t('user.profile')">
       <div class="profile-columns">
         <div>
           <div class="row-condensed">{{$t('user.id')}}:</div>
@@ -18,9 +17,7 @@
     </Box>
 
     <!-- Change password -->
-    <Box>
-      <template #header>{{$t('user.changePassword')}}</template>
-
+    <Box :title="$t('user.changePassword')">
       <!-- Feedback -->
       <el-collapse-transition>
         <Alert
