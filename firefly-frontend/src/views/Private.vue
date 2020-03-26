@@ -64,7 +64,7 @@ export default {
       this.$store.commit('toggleUiState');
     },
     fitToScreen: function() {
-      if (window.innerWidth <= 800) {
+      if (window.innerWidth <= 1024) {
         this.$store.commit('collapseUi');
       } else {
         this.$store.commit('expandUi');

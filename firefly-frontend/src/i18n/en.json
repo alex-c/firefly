@@ -6,6 +6,9 @@
     "forbiddenError": "You are not authorized to do that.",
     "account": "Account",
     "logout": "Log out",
+    "id": "ID",
+    "name": "Name",
+    "noData": "No data.",
     "dashboard": "Dashboard",
     "finances": "Finances",
     "accounts": "Accounts",
@@ -16,7 +19,9 @@
     "account-admin": "Accounts",
     "language": "Language",
     "theme": "Theme",
-    "save": "Save"
+    "back": "back",
+    "save": "Save",
+    "edit": "Edit"
   },
   "login": {
     "welcome": "Welcome to Firefly!",
@@ -45,6 +50,16 @@
     },
     "badPassword": "The provided old password is wrong.",
     "passwordChanged": "Password successfully changed!"
+  },
+  "users": {
+    "title": "Users",
+    "filter": "Filter users...",
+    "create": "New User",
+    "role": "Role",
+    "roles": {
+      "admin": "Administrator",
+      "none": "None"
+    }
   },
   "themes": {
     "dark": "Dark",
