@@ -7,9 +7,8 @@
 
     <!-- Login page -->
     <div id="login-content">
-      <Box>
-        <!-- Header and feedback -->
-        <template v-slot:header>{{ $t('login.welcome') }}</template>
+      <Box :title="$t('login.welcome')">
+        <!-- Feedback -->
         <el-collapse-transition>
           <Alert
             type="error"
