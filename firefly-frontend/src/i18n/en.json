@@ -20,7 +20,8 @@
     "theme": "Theme",
     "back": "back",
     "save": "Save",
-    "edit": "Edit"
+    "edit": "Edit",
+    "ok": "Ok"
   },
   "login": {
     "welcome": "Welcome to Firefly!",
@@ -58,7 +59,22 @@
     "roles": {
       "admin": "Administrator",
       "none": "None"
-    }
+    },
+    "loginId": "Login ID",
+    "generateId": "Generate an ID from the user's name.",
+    "generatePassword": "Generate a random password.",
+    "validation": {
+      "name": "Please enter a user name.",
+      "id": "Please enter or generate a user ID.",
+      "password": "Please enter or generate a user password."
+    },
+    "passwordResetLink": {
+      "generate": "Generate a password reset link: ",
+      "info": "Generates a link with which the user will be able to set a new password.",
+      "message": "This password reset link can be shared with the user: {link}",
+      "title": "Password Reset Link"
+    },
+    "idTaken": "The user ID `{id}` is already taken."
   },
   "themes": {
     "dark": "Dark",

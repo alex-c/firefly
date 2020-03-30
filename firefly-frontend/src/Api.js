@@ -54,6 +54,17 @@ const Api = {
             .catch(catchNetworkError)
             .then(processResponse);
         },
+        createUser: (id, name, password, isAdmin) => {
+          return fetch(`http://localhost:5000/api/users`, {
+            method: 'POST',
+            withCredentials: true,
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json', Authorization: getAuthorizationHeader() },
+            body: JSON.stringify({ id, name, password, isAdmin }),
+          })
+            .catch(catchNetworkError)
+            .then(processResponse);
+        },
       },
     };
   },

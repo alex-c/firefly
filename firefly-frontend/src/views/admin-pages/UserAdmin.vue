@@ -73,11 +73,13 @@
 </template>
 
 <script>
+import ApiErrorHandlingMixin from '@/mixins/ApiErrorHandlingMixin.js';
 import Breadcrumb from '@/components/Breadcrumb.vue';
 import Box from '@/components/Box.vue';
 
 export default {
   name: 'user-admin',
+  mixins: [ApiErrorHandlingMixin],
   components: { Breadcrumb, Box },
   data() {
     return {
@@ -103,13 +105,7 @@ export default {
           this.users = response.body.data;
           this.totalUsers = response.body.totalElements;
         })
-        .catch(error => {
-          this.$message({
-            message: this.$t(error.message),
-            type: 'error',
-            showClose: true,
-          });
-        });
+        .catch(this.handleApiError);
     },
     changePage: function(page) {
       this.query.page = page;
