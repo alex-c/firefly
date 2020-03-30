@@ -1,11 +1,11 @@
 <template>
   <div id="view-user-admin">
-    <Breadcrumb :name="$t('general.user-admin')" :items="[{name: $t('general.admin')}]" />
+    <Breadcrumb :name="$t('general.users')" :items="[{name: $t('general.admin')}]" />
     <Box :title="$t('users.title')">
       <!-- Header -->
       <template #header-buttons>
         <div class="right">
-          <router-link :to="{path: '/user-admin/create'}">
+          <router-link :to="{path: '/admin/users/create'}">
             <el-button
               type="primary"
               theme="dark"

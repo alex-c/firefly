@@ -10,10 +10,10 @@
 <script>
 export default {
   name: 'menu-button',
-  props: ['name', 'currentRoute', 'icon'],
+  props: ['name', 'routePrefix', 'currentRoute', 'icon'],
   data() {
     return {
-      route: `/${this.name}`,
+      route: this.routePrefix ? `${this.routePrefix}/${this.name}` : `/${this.name}`,
     };
   },
   methods: {

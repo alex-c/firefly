@@ -80,17 +80,17 @@ const routes = [
         component: Trends,
       },
       {
-        path: '/user-admin',
+        path: '/admin/users',
         component: UserAdmin,
         beforeEnter: userIsAdmin,
       },
       {
-        path: '/user-admin/create',
+        path: '/admin/users/create',
         component: UserCreation,
         beforeEnter: userIsAdmin,
       },
       {
-        path: '/account-admin',
+        path: '/admin/accounts',
         component: AccountAdmin,
         beforeEnter: userIsAdmin,
       },

@@ -2,8 +2,8 @@
   <div id="view-user-creation">
     <Breadcrumb
       :name="$t('users.create')"
-      :items="[{name: 'Administration'}, {name: 'Users', path: '/user-admin'}]"
-      back-to="/user-admin"
+      :items="[{name: $t('general.admin')}, {name: $t('general.users'), path: '/admin/users'}]"
+      back-to="/admin/users"
     />
     <Box :title="$t('users.create')">
       <!-- Save button -->

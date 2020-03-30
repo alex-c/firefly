@@ -7,13 +7,15 @@
     <MenuButton name="trends" icon="mdi-finance" :current-route="currentRoute" />
     <MenuHeader name="admin" icon="mdi-shield-key" :collapsed="collapsed" v-if="userIsAdmin" />
     <MenuButton
-      name="user-admin"
+      name="users"
+      routePrefix="/admin"
       icon="mdi-account-group"
       :current-route="currentRoute"
       v-if="userIsAdmin"
     />
     <MenuButton
-      name="account-admin"
+      name="accounts"
+      routePrefix="/admin"
       icon="mdi-bank"
       :current-route="currentRoute"
       v-if="userIsAdmin"
