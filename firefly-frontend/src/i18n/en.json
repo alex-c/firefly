@@ -5,6 +5,7 @@
     "unauthorizedError": "You have been logged out because of missing authorization.",
     "forbiddenError": "You are not authorized to do that.",
     "account": "Account",
+    "user": "User",
     "logout": "Log out",
     "id": "ID",
     "name": "Name",
@@ -72,7 +73,9 @@
       "generate": "Generate a password reset link: ",
       "info": "Generates a link with which the user will be able to set a new password.",
       "message": "This password reset link can be shared with the user: {link}",
-      "title": "Password Reset Link"
+      "title": "Password Reset Link",
+      "titlePlural": "Password Reset Links",
+      "expires": "Expires"
     },
     "idTaken": "The user ID `{id}` is already taken."
   },

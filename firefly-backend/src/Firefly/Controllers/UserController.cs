@@ -15,7 +15,7 @@ namespace Firefly.Controllers
     /// <summary>
     /// API route for user data.
     /// </summary>
-    [Route("api/users")]
+    [Route("api/users"), Authorize]
     public class UserController : ControllerBase
     {
         /// <summary>
@@ -24,14 +24,21 @@ namespace Firefly.Controllers
         private UserService UserService { get; }
 
         /// <summary>
+        /// A service providing auth-related functionality.
+        /// </summary>
+        private AuthService AuthService { get; }
+
+        /// <summary>
         /// Initializes the controller with all needed components.
         /// </summary>
         /// <param name="loggerFactory">Factory to create loggers from.</param>
         /// <param name="userService">Service providing user-related functionality.</param>
-        public UserController(ILogger<UserController> logger, UserService userService)
+        /// <param name="authService">Service providing auth functionality.</param>
+        public UserController(ILogger<UserController> logger, UserService userService, AuthService authService)
         {
             Logger = logger;
             UserService = userService;
+            AuthService = authService;
         }
 
         #region Public getters
@@ -136,6 +143,30 @@ namespace Firefly.Controllers
             {
                 User user = UserService.UpdateUser(id, userUpdateRequest.Name, userUpdateRequest.IsAdmin);
                 return Ok(new UserResponse(user));
+            }
+            catch (EntityNotFoundException exception)
+            {
+                return HandleResourceNotFoundException(exception);
+            }
+            catch (Exception exception)
+            {
+                return HandleUnexpectedException(exception);
+            }
+        }
+
+        /// <summary>
+        /// Generates a password reset link for a given user.
+        /// </summary>
+        /// <param name="id">ID of the user to generate a link for.</param>
+        /// <returns>Returns the newly generated link.</returns>
+        [HttpPost("{id}/reset"), Authorize(Roles = AuthService.ROLE_ADMINISTRATOR)]
+        public IActionResult GeneratePasswordResetLink(string id)
+        {
+            try
+            {
+                User user = UserService.GetUser(id);
+                PasswordResetLink link = AuthService.GeneratePasswordResetLink(user);
+                return Ok(link);
             }
             catch (EntityNotFoundException exception)
             {

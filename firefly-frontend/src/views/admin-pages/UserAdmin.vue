@@ -69,6 +69,29 @@
         </div>
       </div>
     </Box>
+
+    <!-- Password reset links -->
+    <Box :title="$t('users.passwordResetLink.titlePlural')" toggleable toggled>
+      <div class="row">
+        <el-table
+          :data="resetLinks"
+          size="mini"
+          :empty-text="$t('general.noData')"
+          highlight-current-row
+          @current-change="selectUser"
+          ref="userTable"
+          row-key="id"
+        >
+          <el-table-column prop="id" :label="$t('general.id')"></el-table-column>
+          <el-table-column prop="user" :label="$t('general.user')"></el-table-column>
+          <el-table-column
+            prop="expirationTimestamp"
+            :label="$t('users.passwordResetLink.expires')"
+            :formatter="formatRole"
+          ></el-table-column>
+        </el-table>
+      </div>
+    </Box>
   </div>
 </template>
 
@@ -94,6 +117,7 @@ export default {
       selected: {
         id: null,
       },
+      resetLinks: [],
     };
   },
   methods: {

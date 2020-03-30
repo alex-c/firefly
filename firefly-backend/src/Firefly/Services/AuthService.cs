@@ -31,10 +31,10 @@ namespace Firefly.Services
         /// Grants access to user information.
         /// </summary>
         private IReadOnlyUserRepository UserRepository { get; }
+
         /// <summary>
         /// Signing credentials for JWTs.
         /// </summary>
-        /// 
         private SigningCredentials SigningCredentials { get; }
 
         /// <summary>
@@ -116,5 +116,25 @@ namespace Firefly.Services
             // Done!
             return true;
         }
+
+        #region Password reset links
+
+        public IEnumerable<PasswordResetLink> GetAllPasswordResetLinks()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<PasswordResetLink> GetPasswordResetLinksOfUser(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public PasswordResetLink GeneratePasswordResetLink(User user)
+        {
+            // What to do if there is already a link for that user?
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

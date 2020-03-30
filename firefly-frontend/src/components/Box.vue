@@ -3,8 +3,12 @@
     <div class="box-header" v-if="hasHeader">
       <div class="box-title left">{{title}}</div>
       <div class="right">
-        <div class="box-toggle right" v-if="toggleable !== undefined" @click="toggled = !toggled">
-          <span class="mdi mdi-chevron-down-circle" v-if="toggled" />
+        <div
+          class="box-toggle right"
+          v-if="toggleable !== undefined"
+          @click="isToggled = !isToggled"
+        >
+          <span class="mdi mdi-chevron-down-circle" v-if="isToggled" />
           <span class="mdi mdi-chevron-up-circle" v-else />
         </div>
         <div class="header-buttons right">
@@ -12,7 +16,7 @@
         </div>
       </div>
     </div>
-    <div class="box-content" v-show="!toggled">
+    <div class="box-content" v-show="!isToggled">
       <slot />
     </div>
   </div>
@@ -21,10 +25,10 @@
 <script>
 export default {
   name: 'box',
-  props: ['title', 'toggleable'],
+  props: ['title', 'toggleable', 'toggled'],
   data() {
     return {
-      toggled: false,
+      isToggled: this.toggled !== undefined,
     };
   },
   computed: {

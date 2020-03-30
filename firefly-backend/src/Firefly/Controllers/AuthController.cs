@@ -63,5 +63,11 @@ namespace Firefly.Controllers
                 return HandleUnexpectedException(exception);
             }
         }
+
+        [HttpPost("{userId}/reset/{resetKey}")]
+        public IActionResult ResetPassword(string userId, Guid resetKey)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
